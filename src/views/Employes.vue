@@ -170,7 +170,7 @@
                     {{record | formatPrice}}
                 </template>
                 <template slot="name" slot-scope="record, column, index">
-                    <a-tooltip placement="top">
+                    <!-- <a-tooltip placement="top">
                         <template slot="title">
                             <span>Avance</span>
                         </template>
@@ -180,7 +180,7 @@
                         <base-button class="mt-1" v-else disabled size="sm" type="warning">
                             <a-icon type="wallet" style="vertical-align:1.5px;" />
                         </base-button>
-                    </a-tooltip>
+                    </a-tooltip> -->
 
                     <a-tooltip placement="top">
                         <template slot="title">
@@ -190,13 +190,13 @@
                         <base-button class="mt-1" v-else disabled size="sm" type="default" icon="fa fa-edit"></base-button>
                     </a-tooltip>
                     
-                    <a-tooltip placement="top">
+                    <!-- <a-tooltip placement="top">
                         <template slot="title">
                             <span>Reporte</span>
                         </template>
                         <base-button class="mt-1" v-if="validRoute('empleados', 'reportes')" size="sm" v-on:click="reportEmploye(column._id)" type="primary" icon="ni ni-align-center"></base-button>
                         <base-button class="mt-1" v-else size="sm" disabled type="primary" icon="ni ni-align-center"></base-button>
-                    </a-tooltip>
+                    </a-tooltip> -->
                     
                     <a-tooltip placement="top">
                         <template slot="title">

@@ -14,7 +14,7 @@
         </form> -->
         
         <ul class="navbar-nav align-items-center  ml-md-auto ">
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a-dropdown :disabled="validRoute('sucursales', 'cambiar') ? false : true">
               <a-menu slot="overlay" @click="selectBranch">
                 <template v-for="branch of branches">
@@ -25,7 +25,7 @@
               </a-menu>
               <a-button class="mb-2 bg-default text-white font-weight-bold w-100" style="border:none;" > {{branchName}} <a-icon type="down" style="vertical-align:1px;" /> </a-button>
             </a-dropdown>
-          </li>
+          </li> -->
           <li class="nav-item dropdown">
               <a v-on:click="validateNotifications()" class="nav-link" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="ni ni-bell-55" :class="pxSep" style="font-size:18px;z-index:1;"></i>
@@ -142,10 +142,10 @@
                             <a-icon type="shop" style="vertical-align:1px;" />
                             <span>Sucursales</span>
                         </router-link>
-                        <router-link v-if="validRoutee('bodega')" to="/store" class="dropdown-item">
+                        <!-- <router-link v-if="validRoutee('bodega')" to="/store" class="dropdown-item">
                             <i class="ni ni-box-2"></i>
                             <span>Bodega</span>
-                        </router-link>
+                        </router-link> -->
                         <!-- <router-link to="/profile" class="dropdown-item">
                             <i class="ni ni-calendar-grid-58"></i>
                             <span>Actividad</span>

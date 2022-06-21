@@ -111,8 +111,6 @@ Vue.use(new VueSocketIO({
     connection: endPoint.endpointTarget,
   })
 );
-Vue.use(VueProgress)
-Vue.use(VueCarousel);
 
 /* FONTS LIBRARY */
 library.add(faUserSecret, faCloudUploadAlt, faRedoAlt, faTimes, faTag, faPercent, faMoneyBillWave, faMoneyCheckAlt, faHandHoldingUsd, faUserPlus, faFolderPlus, faRedo, faUserEdit, faPager, faEdit, faTrash, faClipboard, faShoppingCart)

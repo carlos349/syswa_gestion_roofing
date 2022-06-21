@@ -6,12 +6,20 @@
             </div>
         </nav>
         <div class="container-fluid" style="margin-top:8rem;">
+            <a-tooltip>
+                <template slot="title">
+                    Cambiar idioma
+                </template>
+                <base-button @click="changeLenguage" class="float-right mt-1" style="z-index: 10000;border-radius: 50%;height: 50px;width: 50px;right: 3%;top: 88%;position: fixed;" type="default">
+                    <i class="fa fa-flag" style="vertical-align:1px;font-size:1.6em;left: 12px;top: 13px;position: absolute;"></i>
+                </base-button>
+            </a-tooltip>
             <card shadow>
                 <a-spin :spinning="spinningDate">
-                    <form-wizard @on-complete="finalFunction" color="#174c8e" back-button-text="Atrás" next-button-text="Siguiente" finish-button-text="¡Agendar!" ref="wizard"> 
-                        <h2 v-if="validWizard" slot="title">Datos de agendamiento </h2>
-                        <h2 v-else slot="title" class="text-danger">¡Debe completar los datos!</h2>
-                        <tab-content class="mt-4" title="Servicios" icon="fa fa-layer-group" :before-change="validateFirstStep" >
+                    <form-wizard @on-complete="finalFunction" color="#174c8e" :back-button-text="setLenguage.botonBack" :next-button-text="setLenguage.botonNext" :finish-button-text="setLenguage.botonSchedule" ref="wizard"> 
+                        <h2 v-if="validWizard" slot="title">{{setLenguage.menu.header}}</h2>
+                        <h2 v-else slot="title" class="text-danger">¡{{setLenguage.menu.alert}}!</h2>
+                        <tab-content class="mt-4" :title="setLenguage.menu.service" icon="fa fa-layer-group" :before-change="validateFirstStep" >
                             <div v-if="desactive">
                                 <center>
                                     <h1 class="text-center w-50 mt-4">
@@ -64,7 +72,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-4">
-                                        <h2 style="margin-top:-50px;">Servicios seleccionados</h2>
+                                        <h2 style="margin-top:-50px;">{{setLenguage.services.select}}</h2>
                                         <template v-if="registerDate.serviceSelectds[0]">
                                             <div v-for="(service, index) in registerDate.serviceSelectds" :key="service._id+'asda'+index" class="w-100 px-4" >
                                                 <div class="card-service row mt-4" style="border-bottom: solid 8px #174c8e">
@@ -93,7 +101,7 @@
                                             </div>
                                         </template>
                                         <div v-else>
-                                            <h2 class="text-center">No ha seleccionado ningún servicio.</h2>
+                                            <h2 class="text-center">{{setLenguage.services.noSelect}}</h2>
                                         </div>
                                     </div>
                                 </div>
@@ -106,7 +114,7 @@
                                     </base-dropdown>
                                     <base-dropdown class="w-100 mx-auto styleDropdown" v-if="servicesPhoneShow">
                                         <base-button style="border-radius:14px;background-color:#d5dadd;color:#1c2021;border:none;" slot="title" type="default" class="dropdown-toggle w-100">
-                                            Servicios 
+                                            {{setLenguage.services.services}} 
                                         </base-button>
                                         <template v-for="service of servicesCat">
                                             <b :key="service.name" v-on:click="selectServicePhone(service._id)" v-if="service.active == true" class="dropdown-item w-100" style="color:#fff;"> {{service.name}} </b>
@@ -114,7 +122,7 @@
                                     </base-dropdown>
                                     
                                     <template v-if="registerDate.serviceSelectds[0]">
-                                        <h2 class="mt-3 text-center">Servicios seleccionados</h2>
+                                        <h2 class="mt-3 text-center">{{setLenguage.services.select}}</h2>
                                         <hr>
                                         <div v-for="(service, index) in registerDate.serviceSelectds" :key="service._id+'asda'+index" class="w-100" >
                                             <div class="card-service mt-4" style="border-bottom: solid 8px #174c8e">
@@ -155,12 +163,12 @@
                                 </div>
                             </div>
                         </tab-content>
-                        <tab-content title="Profesionales" icon="fa fa-users" :before-change="validateLastStep">
+                        <tab-content :title="setLenguage.menu.professional" icon="fa fa-users" :before-change="validateLastStep">
                             <div class="row">
                                 <div class="col-md-4" style="margin-top:16px;">
                                     <div class="w-75 mx-auto" >
                                         <badge type="secondary" style="font-size:.7em !important; margin-top:14px;" class="mb-1 mx-2 w-100">
-                                            <span style="font-family:Arial !important;color:#32325d;font-weight:600;" class="w-100">Seleccione fecha</span> 
+                                            <span style="font-family:Arial !important;color:#32325d;font-weight:600;" class="w-100">{{setLenguage.professionals.date}}</span> 
                                         </badge>
                                         <base-input class="hideThisShit"  style="cursor:pointer;" >
                                             <flat-picker 
@@ -175,8 +183,6 @@
                                                     v-model="dates.simple">
                                             </flat-picker>
                                         </base-input>
-
-                                        
                                     </div>
                                 </div>
                                 <div class="col-md-8">
@@ -186,7 +192,7 @@
                                                 <div class="col-md-6">
                                                     <div class="py-1" style="background-color:#f8fcfd;">
                                                         <badge style="font-size:.7em !important" v-if="servicesSelect.lender != ''" type="secondary" class="mb-1 mx-4">
-                                                            <span style="color:#32325d;font-weight:600;font-family:Arial !important;">Seleccione profesionales</span> <br>
+                                                            <span style="color:#32325d;font-weight:600;font-family:Arial !important;">{{setLenguage.professionals.professional}}</span> <br>
                                                             <span style="color:#32325d;font-weight:600;font-family:Arial !important;" >{{servicesSelect.name}} </span>
                                                         </badge> 
                                                         <badge style="font-size:.7em !important" v-else type="default" class="mb-1"><span style="color:#32325d;font-weight:600;font-family:Arial !important;" >Seleccione prestador y horario</span></badge>
@@ -198,7 +204,7 @@
                                                                 {{servicesSelect.employe}} 
                                                             </base-button>
                                                             <base-button style="border-radius:14px;background-color:#d5dadd;color:#1c2021;border:none;" v-if="servicesSelect.valid == 'none'" disabled slot="title" type="default" class="dropdown-toggle w-100">
-                                                                <span style="color:red">Horarios ocupados</span>
+                                                                <span style="color:red">{{setLenguage.professionals.hoursBusy}}</span>
                                                             </base-button>
                                                             <template v-for="employe of servicesSelect.employes" >
                                                                 <b :key="employe.name" v-if="employe.valid && verifyValidOnline(employe.id) && findDay(employe.days, employe.name)" class="dropdown-item w-100" style="color:#fff;" v-on:click="insertData(indexService, employe.name, employe.days, employe.class, servicesSelect.duration, employe.id, 'check'+indexService, servicesSelect.employes, employe.img)">{{employe.name}}  </b>
@@ -209,37 +215,37 @@
                                                 <div class="col-md-6 pb-2">
                                                     <div class="py-1" style="background-color:#f8fcfd;">
                                                         <badge type="secondary" style="font-size:.7em !important; margin-top:14px;" class="mb-1 mx-2 w-100">
-                                                        <span style="font-family:Arial !important;color:#32325d;font-weight:600;" class="w-100">Seleccione horas</span> 
+                                                        <span style="font-family:Arial !important;color:#32325d;font-weight:600;" class="w-100">{{setLenguage.professionals.hours}}</span> 
                                                         </badge>
                                                         <base-button v-on:click="openBlocks('block'+indexService)" class="responsiveButtonsPercent" v-if="servicesSelect.valid == true" style="border-radius:14px;background-color:#d5dadd;color:#1c2021;border:none;" type="default" >
                                                             <span v-if="servicesSelect.start != ''">{{servicesSelect.start}} / {{servicesSelect.end}} <i style="color:#2dce89;float:right;margin-top:6px;" :id="'check'+indexService" class="fa "></i>
                                                             </span>
-                                                            <span v-else>Seleccione una hora <i class="fa fa-angle-down" style="font-size:16px"></i> </span>
+                                                            <span v-else>{{setLenguage.professionals.selectHour}} <i class="fa fa-angle-down" style="font-size:16px"></i> </span>
                                                         </base-button>
                                                         <base-button class="responsiveButtonsPercent" v-if="servicesSelect.valid == false" style="border-radius:14px;background-color:#d5dadd;color:#1c2021;border:none;" type="default" disabled>
-                                                        Seleccione una hora
+                                                        {{setLenguage.professionals.selectHour}}
                                                         </base-button>
                                                         <base-button class="responsiveButtonsPercent" v-if="servicesSelect.valid == 'none'" style="border-radius:14px;background-color:#d5dadd;color:#1c2021;border:none;" type="default" disabled>
-                                                        <span style="color:red">Horarios ocupados</span>
+                                                        <span style="color:red">{{setLenguage.professionals.hoursBusy}}</span>
                                                         
                                                         </base-button>
                                                         <vue-custom-scrollbar class="mx-auto responsiveButtonsPercent" :id="'block'+indexService" style="max-height:25vh;overflow:hidden;overflow-x: hidden;overflow-y:hidden;background-color:#fff;">
                                                             <div class="col-12" v-for="(block , index) of servicesSelect.blocks" :key="block.hour">
                                                                 <base-button v-if="block.validator == true" v-on:click="selectBloqMulti(block.employes, block.hour, index, indexService,'block'+indexService, 'check'+indexService)" size="sm" class="col-12" type="success">
                                                                     <badge style="font-size:1em !important" type="white" class="text-default col-5 float-left">{{block.hour}}</badge>
-                                                                    <span>Disponible</span>
+                                                                    <span>{{setLenguage.professionals.available}}</span>
                                                                 </base-button>
                                                                 <base-button disabled v-else-if="block.validator == false" size="sm" class="col-12" type="danger">
                                                                     <badge style="font-size:1em !important" type="white" class="text-default col-5 float-left">{{block.hour}}</badge>
-                                                                    <span>Ocupado</span>
+                                                                    <span>{{setLenguage.professionals.busy}}</span>
                                                                 </base-button>
                                                                 <base-button v-else-if="block.validator == 'select'" size="sm" class="col-12" type="default">
                                                                     <badge style="font-size:1em !important" type="white" class="text-default col-5 float-left">{{block.hour}}</badge>
-                                                                    <span>Seleccionado</span>
+                                                                    <span>{{setLenguage.professionals.selected}}</span>
                                                                 </base-button>
                                                                 <base-button style="cursor:not-allowed" v-else size="sm" disabled class="col-12" type="secondary">
                                                                     <badge style="font-size:1em !important" type="white" class="text-default col-5 float-left">{{block.hour}}</badge>
-                                                                    <span>No seleccionable</span>
+                                                                    <span>{{setLenguage.professionals.noSelect}}</span>
                                                                 </base-button>
                                                             </div>
                                                         </vue-custom-scrollbar>
@@ -252,14 +258,14 @@
                             </div>
                         </tab-content>
                         <!-- employes: lendersName, commission: commission, duration: duration, price: price, start: '', end:'', sort: 0, employe: 'Primero disponible', realEmploye: '', valid: false, validAfter: false, discount: discount, itFirst: true, id: '', blocksFirst: [], blocks: [], name: service, microServices: microsService  microServiceSelect -->
-                        <tab-content title="Información" icon="fa fa-question-circle">
+                        <tab-content :title="setLenguage.menu.information" icon="fa fa-question-circle">
                             <div class="row">
                                 <div class="col-md-8 col-sm-12" >
                                     <div class="row">
                                         <div class="card-services-information col-lg-6" v-for="(data, index) in registerDate.serviceSelectds" :key="data.servicio" >
                                             <div class="p-3">
                                                 <center>
-                                                <span class="mb-1 w-100" style="color:#000;font-weight:500;">Servicio {{index + 1}}</span> 
+                                                <span class="mb-1 w-100" style="color:#000;font-weight:500;">{{setLenguage.information.countService}} {{index + 1}}</span> 
                                                 </center>
                                                 
                                                     <base-button type="secondary" class="w-100 text-center mb-1" style="background-color:#d5dadd;color:#1c2021;border:none">
@@ -267,36 +273,20 @@
                                                             
                                                             <span style="color:#fff;font-size:1.4em;text-transform:none;">{{data.name}}
                                                                 
-                                                            </span> 
-                                                        </badge><a-tooltip placement="top">
-                                                                    <template slot="title">
-                                                                        <span>Adicionales: 
-                                                                            <template v-if="data.microServiceSelect.length > 0">
-                                                                                <span v-for="micros of data.microServiceSelect" :key="micros.name">
-                                                                                    {{micros.name}}
-                                                                                </span>  
-                                                                            </template>
-                                                                            <template v-else>
-                                                                                <span>
-                                                                                    No se seleccionó adicional
-                                                                                </span>  
-                                                                            </template>
-                                                                        </span>
-                                                                    </template>
-                                                                    <a-icon class="mr-1" style="cursor: pointer;vertical-align: 0.1em;font-size:1.3em;" type="question-circle" />
-                                                                </a-tooltip><br>
+                                                            </span>
+                                                        </badge><br>
                                                         <span class="mx-auto" style="font-size:1.2em;">{{data.realEmploye}}</span>
                                                     </base-button>
                                                 
                                                 <div style="background-color:#f8fcfd;">
                                                     <badge type="secondary" class="w-100" style="margin-top:-5px;font-weigth:600;font-family: Open Sans, sans-serif;line-height: .2;">
-                                                        <span style="color:#000;font-weight:600;font-size:.96em;text-transform:none;">Desde las</span> 
+                                                        <span style="color:#000;font-weight:600;font-size:.96em;text-transform:none;">{{setLenguage.information.start}}</span> 
                                                     </badge>
                                                     <badge type="secondary" class="w-100" style="margin-top:-5px;font-weigth:600;font-family: Open Sans, sans-serif;line-height: .2;">
                                                         <span style="color:#000;font-weight:600;font-size:2.8em;">{{data.start}}</span> 
                                                     </badge>
                                                     <badge type="secondary" class="w-100" style="margin-top:-5px;font-weigth:600;font-family: Open Sans, sans-serif;line-height: .2;">
-                                                        <span style="color:#000;font-weight:600;font-size:.96em;text-transform:none;">Hasta las</span> 
+                                                        <span style="color:#000;font-weight:600;font-size:.96em;text-transform:none;">{{setLenguage.information.end}}</span> 
                                                     </badge>
                                                     <badge type="secondary" class="w-100" style="margin-top:-5px;font-weigth:600;font-family: Open Sans, sans-serif;line-height: .2;">
                                                         <span style="color:#000;font-weight:600;font-size:2.8em;">{{data.end}}</span> 
@@ -308,23 +298,19 @@
                                 </div>
                                 <div class="col-md-4 col-sm-12 pt-5">
                                     <center>
-                                        <base-dropdown class="mt-1 responsiveButtonsPercent mx-auto styleDropdown">
+                                        <!-- <base-dropdown class="mt-1 responsiveButtonsPercent mx-auto styleDropdown">
                                             <base-button slot="title" type="succes" class="dropdown-toggle w-100 dropdownPay" style="border-radius:14px; border: 1px solid #174c8e">
                                                 Selecciona un tipo de pago
                                             </base-button>
                                             <b class="dropdown-item w-100" style="color:white;" v-on:click="selectPay('Presencial efectivo')">Presencial efectivo</b>
                                             <b class="dropdown-item w-100" style="color:white;" v-on:click="selectPay('Presencial Débito')">Presencial Débito</b>
                                             <b class="dropdown-item w-100" style="color:white;" v-on:click="selectPay('Presencial Crédito')">Presencial Crédito</b>
-                                            <!-- <b class="dropdown-item w-100" style="color:#32325d;" v-on:click="selectPay('WebPay')">WebPay</b>  -->
-                                        </base-dropdown><br>
+                                        </base-dropdown><br> -->
                                         <base-button class="mt-3 responsiveButtonsPercent mx-auto" type="secondary" style="border-radius:14px;background-color:#d5dadd;color:#1c2021;border:none;">
-                                        Fecha: <strong>{{dates.simple}}</strong>
+                                            {{setLenguage.information.date}}: <strong>{{dates.simple}}</strong>
                                         </base-button><br>
                                         <base-button class="mt-3 responsiveButtonsPercent mx-auto" type="secondary" style="border-radius:14px;background-color:#d5dadd;color:#1c2021;border:none;">
-                                            Hora de inicio: <strong v-if="registerDate.serviceSelectds[0]">{{registerDate.serviceSelectds[0].start}}</strong>
-                                        </base-button><br>
-                                        <base-button class="mt-3 responsiveButtonsPercent mx-auto" type="secondary" style="border-radius:14px;background-color:#d5dadd;color:#1c2021;border:none;">
-                                            Total: <strong class="text-uppercase">$ {{formatPrice(totalPrice)}}</strong>
+                                            {{setLenguage.information.initHour}}: <strong v-if="registerDate.serviceSelectds[0]">{{registerDate.serviceSelectds[0].start}}</strong>
                                         </base-button>
                                     </center><br>
                                 </div>
@@ -381,7 +367,7 @@
                   class="border-0">
                 <template>
                     <div class="text-muted text-center mb-3">
-                        <h3>Formulario de compra</h3>
+                        <h3>{{setLenguage.finalInfo.title}}</h3>
                     </div>
                 </template>
                 <template>
@@ -422,7 +408,7 @@
             </template>
             <template>
                 <div class="text-muted text-center">
-                    <h3>Complete para agendar</h3>
+                    <h3>{{setLenguage.modal.header}}</h3>
                 </div>
             </template>
             <template>
@@ -431,7 +417,7 @@
                         <base-input alternative
                             type="text"
                             v-on:keyup="validFields()"
-                            placeholder="Escriba su nombre"
+                            :placeholder="setLenguage.modal.firstNameField"
                             v-model="registerUser.firstName"
                             addon-left-icon="fa fa-user">
                         </base-input>
@@ -440,7 +426,7 @@
                     <base-input alternative
                         type="text"
                         v-on:keyup="validFields()"
-                        placeholder="Escriba su apellido"
+                        :placeholder="setLenguage.modal.lastNameField"
                         v-model="registerUser.lastName"
                         addon-left-icon="fa fa-user">
                     </base-input>
@@ -448,7 +434,7 @@
                     <base-input alternative
                         type="email"
                         v-on:keyup="validFields()"
-                        placeholder="Escriba su correo"
+                        :placeholder="setLenguage.modal.emailField.placeholder"
                         v-model="registerUser.email"
                         addon-left-icon="ni ni-email-83">
                     </base-input>
@@ -458,28 +444,28 @@
                         :default-phoner-number="registerUser.phone.nationalNumber"
                         :default-country-code="registerUser.phone.countryCode"
                         :translations="{
-                            countrySelectorLabel: 'Código de país',
-                            countrySelectorError: 'Elije un país',
-                            phoneNumberLabel: 'Número de teléfono',
-                            example: 'Ejemplo :'
+                            countrySelectorLabel: setLenguage.modal.phoneField.countrySelectorLabel,
+                            countrySelectorError: setLenguage.modal.phoneField.countrySelectorError,
+                            phoneNumberLabel: setLenguage.modal.phoneField.phoneNumberLabel,
+                            example: setLenguage.modal.phoneField.example
                         }"/>
                     </div>
-                    <label for="date" class="w-100 mt-2">Fecha de nacimiento </label>
+                    <label for="date" class="w-100 mt-2">{{setLenguage.modal.birthDateField.label}} </label>
                     <a-date-picker class="w-100" :locale="locale" :format="dateFormat" @change="selectBirthday" />
                     <span style="color:red;position:absolute;right:35px;top:270px;z-index:1;">*</span>
                     <div class="col-12">
                         <div class="row">
                             <div class="col-12 col-md-6 col-lg-6">
                                 <base-button class="mt-4" style="width:200px;border-radius:14px;color:white;border:none;" type="primary" v-on:click="ifUserRegister = false">
-                                    Atrás
+                                    {{setLenguage.modal.botonBack}}
                                 </base-button>
                             </div>
                             <div class="col-12 col-md-6 col-lg-6">
                                 <base-button v-if="validRegister" class="mt-4" style="width:200px;border-radius:14px;background-color:#d5dadd;color:#1c2021;border:none;" type="success" v-on:click="registerClients">
-                                    Registrar y continuar
+                                    {{setLenguage.modal.botonRegister}}
                                 </base-button>
                                 <base-button v-else class="mt-4" style="width:200px;border-radius:14px;background-color:#d5dadd;color:#1c2021;border:none;" type="success" disabled>
-                                    Registrar y continuar
+                                    {{setLenguage.modal.botonRegister}}
                                 </base-button>
                             </div>
                         </div>
@@ -489,16 +475,16 @@
                     
                 </div>
                 <div class="card p-3" v-else>
-                    <label for="branche">Correo</label>
+                    <label for="branche">{{setLenguage.modal.emailField.label}}</label>
                     <base-input alternative
                         type="email"
                         v-on:keyup="validVerifyFunc()"
-                        placeholder="Escriba su correo"
+                        :placeholder="setLenguage.modal.emailField.placeholder"
                         v-model="registerUser.email"
                         addon-left-icon="ni ni-email-83">
                     </base-input>
-                    <label for="branche">Seleccione la sucursal</label>
-                    <a-select allowClear placeholder="Busque la sucursal" class="input-group-alternative clearClass" style="width: 100%" size="large">
+                    <label for="branche">{{setLenguage.modal.branchField.label}}</label>
+                    <a-select allowClear :placeholder="setLenguage.modal.branchField.placeholder" class="input-group-alternative clearClass" style="width: 100%" size="large">
                         <template v-for="branch in branches">
                             <a-select-option :key="branch._id" @click="selectBranch(branch)"  :value="branch.name" v-if="branch.active">
                                 {{branch.name}}
@@ -508,10 +494,10 @@
                     <div class="row">
                         <div class="col-md-12">
                             <base-button v-if="validVerify" class="mt-4 float-right" style="width:200px;border-radius:14px;background-color:#d5dadd;color:#1c2021;border:none;" type="success" v-on:click="verifyData">
-                                Confirmar
+                                {{setLenguage.modal.botonConfirm}}
                             </base-button>
                             <base-button v-else class="mt-4 float-right" style="width:200px;border-radius:14px;background-color:#d5dadd;color:#1c2021;border:none;" type="success" disabled>
-                                Confirmar
+                                {{setLenguage.modal.botonConfirm}}
                             </base-button>
                         </div>
                     </div>
@@ -521,7 +507,7 @@
         <a-modal v-model="modals.modal4" class="modalFinal" @cancel="location" :closable="false" >
             <template>
                 <div class="text-muted text-center">
-                    <h3>Formulario de compra</h3>
+                    <h3>{{setLenguage.finalInfo.title}}</h3>
                 </div>
             </template>
             <template>
@@ -529,21 +515,23 @@
                     <hr>
                     <div>
                         <p>
-                            ¡Listo! Hemos enviado la cita a tu correo electrónico con todos los detalles del agendamiento.
+
+                            {{setLenguage.finalInfo.message}}
+                            <!-- ¡Listo! Hemos enviado la cita a tu correo electrónico con todos los detalles del agendamiento.
                             <b style="font-weight:600;">Por favor verificar que todo esté correcto</b>y en caso de haber algún error o no poder asistir debes presionar el botón de Cancelar para dejar sin efecto el agendamiento.
                             <br><br>
                             Una vez tomada la hora, el día previo a la cita te llegará un correo de confirmación y es importante que le des al botón de <b style="font-weight:600;">Confirmar</b> la hora tomada, de lo contrario entenderemos que no asistirás. <br><br>
-                            Si dicho correo electrónico de agendamiento no llega, recuerda revisar la caja de spam o correo no deseado. En caso de no encontrar la información por favor ponte en contacto con nosotros a través de nuestras redes de atención o al WhatsApp y verificaremos de inmediato.
+                            Si dicho correo electrónico de agendamiento no llega, recuerda revisar la caja de spam o correo no deseado. En caso de no encontrar la información por favor ponte en contacto con nosotros a través de nuestras redes de atención o al WhatsApp y verificaremos de inmediato. -->
                             
                         </p>
                         <hr class="mt-2 mb-2">
-                        <p class="text-center">+56 9 7262 8949</p>
+                        <p class="text-center">{{setLenguage.finalInfo.phone}}</p>
                     </div>
                 </div>     
             </template>
             <template slot="footer">
                 <base-button style="width:200px;border-radius:14px;background-color:#d5dadd;color:#1c2021;border:none;" type="success" v-on:click="location">
-                    Finalizar
+                    {{setLenguage.finalInfo.boton}}
                 </base-button>
             </template>
         </a-modal>
@@ -619,10 +607,13 @@
     //frontend
     import flatPicker from "vue-flatpickr-component";
     import {Spanish} from 'flatpickr/dist/l10n/es.js';
+    import {English} from 'flatpickr/dist/l10n/default.js';
     import locale from 'ant-design-vue/es/date-picker/locale/es_ES';
     
     import vueCustomScrollbar from 'vue-custom-scrollbar'
     import VuePhoneNumberInput from 'vue-phone-number-input';
+    import es_ES from '../lang/es_ES.json';
+    import en_US from '../lang/en_US.json';
     import 'vue-phone-number-input/dist/vue-phone-number-input.css';
     const dateNow = new Date()
     export default {
@@ -640,6 +631,9 @@
                 branch: '',
                 branches: [],
                 locale,
+                es_ES,
+                en_US,
+                setLenguage: en_US,
                 branchName: '',
                 dateFormat: 'DD/MM/YYYY',
                 day: 0,
@@ -647,7 +641,7 @@
                     inline: true,
                     allowInput: false,
                     dateFormat: 'd-m-Y',
-                    locale: Spanish, // locale for this instance only
+                    locale: English, // locale for this instance only
                     minDate: new Date(),
                     "disable": [
                         function(date) {
@@ -911,17 +905,8 @@
                             pdf: 'danger'
                         }
                         this.idForRefer = findClient.data.data._id
-                        if (findClient.data.data.historical.length > 0) {
-                            var dataServices = ""
-                            for (const key in findClient.data.data.historical[0].items) {
-                                console.log(item)
-                                const item = findClient.data.data.historical[0].items[key]
-                                dataServices = key == 0 ? item.item.name : dataServices+', '+item.item.name
-                            }
-                            this.dataMessageClient = `Este es la informacion de su ultima atencion ${dataServices}`
-                        }else{
-                            this.dataMessageClient = ""
-                        }
+                        this.dataMessageClient = ""
+                        
                         try {
                             const verifyBlackList = await axios.post(endPoint.endpointTarget+'/clients/verifyBlackList', {
                                 clientId: findClient.data.data._id,
@@ -936,7 +921,7 @@
                             if (!err.response) {
                                 this.$swal({
                                     icon: 'error',
-                                    title: 'Error de conexión',
+                                    title: this.setLenguage.connectionError,
                                     showConfirmButton: false,
                                     timer: 1500
                                 })
@@ -953,21 +938,21 @@
                         }else{
                             this.$swal({
                                 icon: 'success',
-                                title: `¡Bienvenido ${findClient.data.data.firstName}!`,
-                                text: 'Ya puedes agendar tu cita',
+                                title: `¡${this.setLenguage.welcomeMessage.title} ${findClient.data.data.firstName}!`,
+                                text: this.setLenguage.welcomeMessage.message,
                                 showConfirmButton: true
                             })
                         }
                         this.modals.modal6 = false
                     }else{
                         this.$swal({
-                            title: `El correo ${this.registerUser.mail} no se encuetra registrado.`,
-                            text: 'Si ya ha frecuentado este local verifique su correo, sino presione continuar para registrarse.',
+                            title: `${this.setLenguage.modal.messageNotRegister1} ${this.registerUser.mail} ${this.setLenguage.modal.messageNotRegister2}.`,
+                            text: this.setLenguage.modal.messageNotRegister3,
                             type: 'warning',
                             icon: 'warning',
                             showCancelButton: true,
-                            confirmButtonText: 'Continuar',
-                            cancelButtonText: 'Verificar correo',
+                            confirmButtonText: this.setLenguage.modal.continue,
+                            cancelButtonText: this.setLenguage.modal.botonVerify,
                             showCloseButton: true,
                             showLoaderOnConfirm: true
                         }).then((result) => {
@@ -980,7 +965,7 @@
                     if (!err.response) {
                         this.$swal({
                             icon: 'error',
-                            title: 'Error de conexión',
+                            title: this.setLenguage.connectionError,
                             showConfirmButton: false,
                             timer: 1500
                         })
@@ -991,8 +976,8 @@
                 this.$swal({
                     type: 'error',
                     icon: 'info',
-                    title: 'Debe identificarse',
-                    text: 'Debe colocar un correo electrónico valido (en caso de no estar registrado, debe registrarse) y seleccionar una sucursal de preferencia',
+                    title: this.setLenguage.modal.clickOutside.title,
+                    text: this.setLenguage.modal.clickOutside.message,
                     showConfirmButton: true
                 })
                 setTimeout(() => {
@@ -1028,7 +1013,7 @@
                     if (!err.response) {
                         this.$swal({
                             icon: 'error',
-                            title: 'Error de conexión',
+                            title: this.setLenguage.connectionError,
                             showConfirmButton: false,
                             timer: 1500
                         })
@@ -1038,7 +1023,7 @@
             location(){
                 this.$swal({
                     icon: 'success',
-                    title: '¡Cita creada con éxito!',
+                    title: '¡'+this.setLenguage.createdSuccesfuly+'!',
                     showConfirmButton: false,
                     timer: 3000
                 })
@@ -1053,21 +1038,22 @@
                 
             },
             finalFunction(){
-                if (this.validPay) {
-                    if (this.registerUser.pay == 'Transferencia') {
-                        this.modals.modal5 = true
-                    }else{
-                        this.finallyAgend()
-                    }
-                }else{
-                    $('.dropdownPay').css({'color': 'red'})
-                    this.$swal({
-                        icon: 'error',
-                        title: 'Por favor, Seleccione el tipo de pago',
-                        showConfirmButton: false,
-                        timer: 3000
-                    })
-                }
+                this.finallyAgend()
+                // if (this.validPay) {
+                //     if (this.registerUser.pay == 'Transferencia') {
+                //         this.modals.modal5 = true
+                //     }else{
+                //         this.finallyAgend()
+                //     }
+                // }else{
+                //     $('.dropdownPay').css({'color': 'red'})
+                //     this.$swal({
+                //         icon: 'error',
+                //         title: 'Por favor, Seleccione el tipo de pago',
+                //         showConfirmButton: false,
+                //         timer: 3000
+                //     })
+                // }
             },
             formatPrice(value) {
                 let val = (value/1)
@@ -1429,6 +1415,15 @@
                             timer: 1500
                         })
                     }
+                }
+            },
+            changeLenguage(){
+                if (this.setLenguage.lenguage  == "EN") {
+                    this.setLenguage = this.es_ES
+                    this.configDate.locale = Spanish
+                }else{
+                    this.setLenguage = this.en_US
+                    this.configDate.locale = English
                 }
             },
             async getEmployes(){
@@ -2527,7 +2522,7 @@
                     if (res.data.status == 'client create') {
                         this.$swal({
                             icon: 'success',
-                            title: 'Te has registrado con éxito',
+                            title: this.setLenguage.modal.registerSuccess,
                             showConfirmButton: false,
                             timer: 2500
                         })
@@ -2544,7 +2539,6 @@
                         this.$swal({
                             icon: 'error',
                             title: 'El cliente ya existe',
-                            text: 'Por favor seleccione una sucursal para avanzar.',
                             showConfirmButton: true,
                         })
                         this.ifUserRegister = false
@@ -2553,7 +2547,7 @@
                     if (!err.response) {
                         this.$swal({
                             icon: 'error',
-                            title: 'Error de conexión',
+                            title: this.setLenguage.modal.existClient,
                             showConfirmButton: false,
                             timer: 1500
                         })

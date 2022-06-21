@@ -56,11 +56,11 @@
                         <div slot="header" class="bg-white border-0">
                             <div class="row align-items-center">
                                 <h3 class="mb-2 w-100 text-center">Secciones</h3>
-                                <base-button class="w-100 mt-2 mx-auto" :outline="selectedConfig == 'typePay' ? false : true" type="primary" v-on:click="fixed('typePay'), getConfiguration()">Tipos de pago</base-button>
+                                <!-- <base-button class="w-100 mt-2 mx-auto" :outline="selectedConfig == 'typePay' ? false : true" type="primary" v-on:click="fixed('typePay'), getConfiguration()">Tipos de pago</base-button> -->
                                 <base-button class="w-100 mt-2 mx-auto" :outline="selectedConfig == 'agend' ? false : true" type="primary" v-on:click="selectedConfig = 'agend', getConfiguration()">Agendamiento</base-button>
                                 <base-button class="w-100 mt-2 mx-auto" :outline="selectedConfig == 'blackList' ? false : true" type="primary" v-on:click="fixed('blackList'), getConfiguration()">Lista negra</base-button>
                                 <base-button class="w-100 mt-2 mx-auto" :outline="selectedConfig == 'information' ? false : true" type="primary" v-on:click="selectedConfig = 'information', getConfiguration()">Información</base-button>
-                                <base-button class="w-100 mt-2 mx-auto" :outline="selectedConfig == 'microServices' ? false : true" type="primary" v-on:click="selectedConfig = 'microServices', getConfiguration()">Adicionales</base-button>
+                                <!-- <base-button class="w-100 mt-2 mx-auto" :outline="selectedConfig == 'microServices' ? false : true" type="primary" v-on:click="selectedConfig = 'microServices', getConfiguration()">Adicionales</base-button> -->
                             </div>
                         </div>
                     </card>
@@ -156,7 +156,7 @@
 
                             <p class="mx-auto"> <strong class="mr-2">Permitir eliminar citas</strong> <a-switch  :checked="configData.datesPolitics.deleteDates" @click="changeDatePolitic('deleteDates')" /></p>
                             
-                            <p class="mx-auto"> 
+                            <!-- <p class="mx-auto"> 
                               <strong class="mr-2"> 
                                 <a-tooltip placement="topLeft">
                                     <template slot="title">
@@ -167,7 +167,7 @@
                                 Adicionales 
                               </strong> 
                               <a-switch class="mr-3" :checked="configData.datesPolitics.microServices" @click="changeDatePolitic('microServices')" />
-                            </p>
+                            </p> -->
                           </div>
                           <div class="col-4">
                             <h5 class="text-center">Días</h5>

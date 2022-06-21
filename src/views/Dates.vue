@@ -41,7 +41,7 @@
                                 Bloqueos
                             </base-button>
 
-                            <base-dropdown :disabled="validRoute('agendamiento', 'filtrar') ? false : true" class="float-right mr-0 qloq" size="sm">
+                            <base-dropdown v-if="validRoute('agendamiento', 'filtrar')" class="float-right mr-0 qloq" size="sm">
                                 <base-button :disabled="validRoute('agendamiento', 'filtrar') ? false : true" slot="title" type="default" class="dropdown-toggle col-md-12 col-sm-6">
                                         {{employeByDate}}
                                 </base-button>
@@ -690,7 +690,7 @@
                                         </center>
                                     </div>
                                 </a-tooltip>
-                                <template v-if="validRoute('agendamiento', 'finalizar')">
+                                <!-- <template v-if="validRoute('agendamiento', 'finalizar')">
                                     <div v-if="selectedEvent.process == true" v-on:click="dateModals.modal3 = true, plusMicroFinally()" class="col-md-6 mx-auto mt-2"><center>
 
                                         <base-button outline size="sm" class="mx-auto col-12" type="default">
@@ -699,7 +699,22 @@
                                         </base-button> 
                                     </center>
                                     </div>
-                                </template>
+                                </template> -->
+                                <div class="col-md-6 mx-auto mt-2">
+                                    <center>
+                                        <div v-if="selectedEvent.process == true && validRoute('agendamiento', 'confirmacion')">
+                                            <base-button size="sm" style="cursor:default" v-if="selectedEvent.confirmation" type="success" class="mx-auto col-12">
+                                                <i style="margin-top:3px" class="ni ni-check-bold float-right"></i>
+                                                <span class="float-left">Confirmada</span> 
+                                            </base-button>
+
+                                            <base-button outline size="sm" v-else class="mx-auto col-12" type="primary" v-on:click="sendConfirmation([selectedEvent], selectedEvent.client.name, selectedEvent.client.email, selectedEvent.start, selectedEvent.end, selectedEvent.services, selectedEvent.employe, selectedEvent, false, dateSplit2(selectedEvent.start),selectedEvent.start, selectedEvent.end )">
+                                                <i style="margin-top:3px" class="ni ni-send float-right"></i>
+                                                <span class="float-left">Confirmación</span>  
+                                            </base-button>
+                                        </div>   
+                                    </center>
+                                </div>
                                 
                                 <div v-if="validRoute('agendamiento', 'eliminar') && selectedEvent.process == true" v-on:click="deleteDate(selectedEvent._id,selectedEvent.cliente, false)" class="col-md-6 mx-auto mt-2">
                                     <center>
@@ -719,21 +734,6 @@
                                     </center>
                                 </div>
 
-                                <div class="col-md-6 mx-auto mt-2">
-                                    <center>
-                                        <div v-if="selectedEvent.process == true && validRoute('agendamiento', 'confirmacion')">
-                                            <base-button size="sm" style="cursor:default" v-if="selectedEvent.confirmation" type="success" class="mx-auto col-12">
-                                                <i style="margin-top:3px" class="ni ni-check-bold float-right"></i>
-                                                <span class="float-left">Confirmada</span> 
-                                            </base-button>
-
-                                            <base-button outline size="sm" v-else class="mx-auto col-12" type="primary" v-on:click="sendConfirmation([selectedEvent], selectedEvent.client.name, selectedEvent.client.email, selectedEvent.start, selectedEvent.end, selectedEvent.services, selectedEvent.employe, selectedEvent, false, dateSplit2(selectedEvent.start),selectedEvent.start, selectedEvent.end )">
-                                                <i style="margin-top:3px" class="ni ni-send float-right"></i>
-                                                <span class="float-left">Confirmación</span>  
-                                            </base-button>
-                                        </div>   
-                                    </center>
-                                </div>
                             </div>
                             
                             <dt class="mt-4 text-center">Histórico de cliente </dt>

@@ -1,0 +1,86 @@
+{
+    "lenguage": "EN",
+    "botonNext": "Continue",
+    "botonBack": "Go back",
+    "botonSchedule": "Schedule!",
+    "modal": {
+        "header": "Complete to schedule",
+        "emailField": {
+            "label": "Email",
+            "placeholder": "write your email"
+        },
+        "branchField": {
+            "lable": "select the office",
+            "placeholder": "find the office"
+        },
+        "botonConfirm": "Confirm",
+        "messageNotRegister1": "The email",
+        "messageNotRegister2": "is not registered",
+        "messageNotRegister3": "If you have already booked, check your email. if not press continue to register.",
+        "botonVerify": "Verify email",
+        "continue": "Continue",
+        "firstNameField": "Write your first name",
+        "lastNameField": "Write your last name",
+        "phoneField": {
+            "countrySelectorLabel": "code country",
+            "countrySelectorError": "choose country",
+            "phoneNumberLabel": "Write your phone number",
+            "example": "Example :"
+        },
+        "birthDateField": {
+            "label": "Birth date",
+            "placeholder": "Select your birth date"
+        },
+        "botonBack": "Go back",
+        "botonRegister": "Register and continue",
+        "registerSuccess": "Register success",
+        "existClient": "Client already exists",
+        "clickOutside": {
+            "title": "must be identified",
+            "message": "You must enter a valid email (if you are not registered, you must register) and select a preferred office"
+        }
+    },
+    "welcomeMessage": {
+        "title": "Welcome",
+        "message": "You can now schedule your service"
+    },
+    "menu": {
+        "header": "Scheduling data",
+        "service": "Services",
+        "professional": "Professionals",
+        "information": "Information",
+        "alert": "you must complete the data"
+    },
+    "services": {
+        "select": "Service selecteds",
+        "noSelect": "You have not selected any services",
+        "services": "Services"
+    },
+    "professionals": {
+        "date": "Select date",
+        "professional": "Select professional",
+        "hours": "Select times",
+        "hoursBusy": "Busy hours",
+        "selectHour": "Select a time",
+        "busy": "busy",
+        "selected": "Selected",
+        "noSelect": "Not selectable",
+        "available": "Available",
+        "firstAvailable": "First available"
+    },
+    "information": {
+        "date": "Date",
+        "initHour": "Start time",
+        "countService": "Service",
+        "start": "Since",
+        "end": "Until"
+    },
+    "connectionError": "Connection error",
+    "createdSuccesfuly": "Schedule created successfully",
+    "finalInfo": {
+        "title": "Final message information",
+        "message": "Clever! We have sent the appointment to your email with all the details of the schedule. Please verify that everything is correct and if there is an error or you cannot attend, you must press the Cancel button to cancel the scheduling. <br> Once the time has been taken, the day before the appointment you will receive a confirmation email and it is important that you click on the Confirm the time taken button, otherwise we will understand that you will not attend. <br> If the scheduling email does not arrive, remember to check the spam or junk mail box. If you do not find the information, please contact us through our service networks or WhatsApp and we will verify immediately.",
+        "boton": "Ready",
+        "phone": "(407) 496-7861"
+    }
+}

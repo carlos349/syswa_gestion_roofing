@@ -65,7 +65,7 @@
                                     v-model="serviceAditionalRegister">
                                 </textarea>
                             </div>
-                            <div class="col-md-4">
+                            <!-- <div class="col-md-4">
                                 <base-input alternative
                                     max-count="100"
                                     placeholder="Comisión (%)"
@@ -82,15 +82,15 @@
                                     class="form-control w-100"
                                 />
 
-                            </div>
-                            <div class="col-md-4 marginIf">
+                            </div> -->
+                            <div class="col-md-6 marginIf mt-3">
                                 <select class="form-control mb-3" v-model="categoryRegister">
                                     <option style="color:black;">Categoría</option>
                                     <option style="color:black;" v-for="category of categories" :key="category.name">{{category.name}}</option>
                                 </select>
                             </div>
                             
-                            <div class="col-md-6 row ml-1 mb-3" style="margin-top:-10px;"> 
+                            <div class="col-md-6 row ml-1 mb-3" style="margin-top:0px;"> 
                                 <label class="ml-5 mb-3">
                                     Tiempo del servicio
                                 </label>
@@ -133,12 +133,12 @@
                                     </a-select>
                                 </div>
                             </div>
-                            <div style="margin-top:-10px" class="row col-sm-6 mx-auto">
+                            <!-- <div style="margin-top:-10px" class="row col-sm-6 mx-auto">
                                 <h3 class="w-100 text-center">¿Aplica descuento?</h3>
                                 <base-radio name="false" value="true" inline class="mb-3 mx-auto" v-model="addDiscount"> <b>Si</b> </base-radio>
                                 <base-radio name="true" value="false" checked inline class="mb-3 mx-auto" v-model="addDiscount"> <b>No</b> </base-radio> 
-                            </div>
-                            <div class="col-12 row">
+                            </div> -->
+                            <!-- <div class="col-12 row">
                                 <div class="col-md-6 pt-4 pl-3">
                                     <p class="mx-auto font-weight-normal mt-2"> <strong class="mr-2">Aplica abono </strong> <a-switch class="mr-2" :checked="payment" @click="checkPayment()"/></p>
                                 </div>
@@ -152,7 +152,7 @@
                                         class="form-control w-100"
                                     />
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                         <tabs fill class="flex-column flex-md-row">
                             <tab-pane>
@@ -175,7 +175,7 @@
                                 </vue-custom-scrollbar >
                             </tab-pane>
 
-                            <tab-pane title="Profile">
+                            <!-- <tab-pane title="Profile">
                                 <span slot="title">
                                     <i class="fa fa-box-open">
                                         Productos
@@ -195,7 +195,7 @@
                                         </base-button>
                                     </div>
                                 </vue-custom-scrollbar>
-                            </tab-pane>
+                            </tab-pane> -->
                         </tabs>
                         <div class="text-center">
                             <base-button type="primary" class="my-4" v-on:click="registerService">Registrar</base-button>
@@ -236,7 +236,7 @@
                                     v-model="servicesAdditionalEdit">
                                 </textarea>
                             </div>
-                            <div class="col-md-4">
+                            <!-- <div class="col-md-4">
                                 <base-input alternative
                                     type="text"
                                     placeholder="Comisión"
@@ -254,13 +254,13 @@
                                     class="form-control mx-auto w-100"
                                     addon-right-icon="fa fa-asterisk text-danger" 
                                 />
-                            </div>
-                            <div class="col-md-4 marginIf">
+                            </div> -->
+                            <div class="col-md-6 marginIf mt-3">
                                 <select class="form-control mx-auto mb-3" v-model="editCategoryServicer">
                                     <option style="color:black;" v-for="category of categories" :key="category.name">{{category.name}}</option>
                                 </select>
                             </div>
-                            <div class="col-md-6 row ml-1 mb-3" style="margin-top:-10px;"> 
+                            <div class="col-md-6 row ml-1 mb-3"> 
                                 <label class="ml-5 mb-3">
                                     Tiempo del servicio
                                 </label>
@@ -303,7 +303,7 @@
                                     </a-select>
                                 </div>
                             </div>
-                            <div class="row mx-auto col-md-6" style="margin-top:-2%">
+                            <!-- <div class="row mx-auto col-md-6" style="margin-top:-2%">
                                 <h3 class="w-100 text-center">¿Aplica descuento?</h3>
                                 <base-radio name="false"  inline class="mb-3 mx-auto" v-model="addDiscountEdit"> <b>Si</b> </base-radio>
                                 <base-radio name="true"  inline class="mb-3 mx-auto" v-model="addDiscountEdit"> <b>No</b> </base-radio> 
@@ -322,7 +322,7 @@
                                         class="form-control w-100"
                                     />
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                         
                         <tabs fill class="flex-column flex-md-row">
@@ -346,7 +346,7 @@
                                 </vue-custom-scrollbar >
                             </tab-pane>
 
-                            <tab-pane title="Profile">
+                            <!-- <tab-pane title="Profile">
                                 <span slot="title">
                                     <i class="fa fa-box-open">
                                         Productos
@@ -365,11 +365,11 @@
                                                 </div>
                                             </div>
                                         </base-button>
-                                    </div>
+                                    </div> -->
                                     <!-- <vue-bootstrap4-table :rows="rowsItems" :columns="columnsItem" :classes="classes" :config="configLender" v-on:on-select-row="selectedItem" v-on:on-all-select-rows="selectedAllItem" v-on:on-unselect-row="unSelectedItem" v-on:on-all-unselect-rows="unSelectedAllItem" >
                                     </vue-bootstrap4-table> -->
-                                </vue-custom-scrollbar > 
-                            </tab-pane>
+                                <!-- </vue-custom-scrollbar > 
+                            </tab-pane> -->
                         </tabs>
                         <div class="text-center">
                             
@@ -733,29 +733,6 @@ import mixinES from '../mixins/mixinES'
                     scopedSlots: { customRender: 'format-time' },
                     defaultSortOrder: 'descend',
                     sorter: (a, b) => a.duration - b.duration,
-                    ellipsis: true,
-                },
-                {
-                    title: 'Comisión',
-                    dataIndex: 'commission',
-                    key: 'commission',
-                    scopedSlots: { customRender: 'format-commission' },
-                    ellipsis: true,
-                },
-                {
-                    title: 'Abono',
-                    dataIndex: 'prepayment',
-                    key: 'prepayment',
-                    scopedSlots: { customRender: 'prepayment-slot' },
-                    defaultSortOrder: 'descend',
-                    sorter: (a, b) => a.duration - b.duration,
-                    ellipsis: true,
-                },
-                {
-                    title: 'Descuento',
-                    dataIndex: 'discount',
-                    key: 'discount',
-                    scopedSlots: { customRender: 'discount-slot' },
                     ellipsis: true,
                 },
                 {
@@ -1133,18 +1110,11 @@ import mixinES from '../mixins/mixinES'
                 }
                 timeService = (this.timeHoursRegister * 60) + parseFloat(this.timeMinutesRegister)
             }
-            if (this.serviceRegister == '' || this.priceRegister == 0 || timeService == 0 || this.comissionRegister == '' || this.categoryRegister == 'Categoría') {
+            if (this.serviceRegister == '' || timeService == 0 || this.categoryRegister == 'Categoría') {
                 if (this.categoryRegister == 'Categoría') {
                     this.$swal({
                         icon: 'info',
                         title: 'Seleccione categoría',
-                        showConfirmButton: false,
-                        timer: 1500
-                    })
-                }else if(this.priceRegister == 0){
-                    this.$swal({
-                        icon: 'info',
-                        title: 'Debe registrar precio',
                         showConfirmButton: false,
                         timer: 1500
                     })
@@ -1343,8 +1313,7 @@ import mixinES from '../mixins/mixinES'
                 this.editTimeMinutesRegister = this.editTimeMinutesRegister.split(' ')[0]
             }
             timeService = (this.editTimeHoursRegister * 60) + parseFloat(this.editTimeMinutesRegister)
-            if (this.serviceEdit == '' || this.priceEdit == '' || timeService <= 0 || this.comissionEdit < 0) {
-                console.log(this.serviceEdit + ' - '+ this.priceEdit +' - '+ timeService +' - '+ this.comissionEdit)
+            if (this.serviceEdit == '' || timeService <= 0) {
                 this.$swal({
                     icon: 'error',
                     title: 'Debe rellenar los datos',

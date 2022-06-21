@@ -563,7 +563,7 @@ export default {
             formData.append('image', this.file)
             formData.append('first_name', this.registerUser.name)
             formData.append('last_name', this.registerUser.lastname)
-            formData.append('email', this.registerUser.email)
+            formData.append('email', this.registerUser.email.trim())
             formData.append('password', this.registerUser.password)
             formData.append('branch', this.registerUser.branch)
             const config = {headers: {'Content-Type': 'multipart/form-data', 'x-access-token': localStorage.userToken, "x-database-connect": endPoint.database }}

@@ -50,7 +50,7 @@
                             <p>{{model.email}} <template v-if="model.about != ''">—</template> {{model.about}}</p>
                         </div>
                     </div>
-                    <card v-if="model.linkLender != ''" class="mt-3" shadow type="secondary">
+                    <!-- <card v-if="model.linkLender != ''" class="mt-3" shadow type="secondary">
                         <div slot="header" class="bg-white border-0">
                             <div class="row align-items-center">
                                 <div class="col-8">
@@ -78,7 +78,7 @@
                                 <span class="description">Ingreso total</span>
                             </div>
                         </div>
-                    </card>
+                    </card> -->
                 </div>
 
                 <div class="col-xl-8">
@@ -88,9 +88,9 @@
                                 <div class="col-md-2 col-6">
                                     <h3 class="mb-0 text-info" style="cursor:pointer;" :style="selectType == 'Profile' ? 'text-decoration: underline;' : 'text-decoration:none;'" @click="selectMenu('Profile')">Mi perfil</h3>
                                 </div>
-                                <div class="col-md-8 col-6" v-if="model.linkLender != ''">
+                                <!-- <div class="col-md-8 col-6" v-if="model.linkLender != ''">
                                     <h3 class="mb-0 text-info" style="cursor:pointer;" :style="selectType == 'Sales' ? 'text-decoration: underline;' : 'text-decoration:none;'" @click="selectMenu('Sales')">Servicios</h3>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                         <template v-if="selectType == 'Profile'">
@@ -172,7 +172,7 @@
                                 </form>
                             </div>
                         </template>
-                        <template v-else>
+                        <!-- <template v-else>
                             <a-config-provider :locale="es_ES">
                                 <template #renderEmpty>
                                     <div style="text-align: center">
@@ -257,7 +257,7 @@
                                     </template>
                                 </a-table>
                             </a-config-provider>
-                        </template>
+                        </template> -->
                     </card>
                 </div>
             </div>

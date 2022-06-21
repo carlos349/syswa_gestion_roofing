@@ -1,0 +1,86 @@
+{
+    "lenguage": "ES",
+    "botonNext": "Continuar",
+    "botonBack": "Atrás",
+    "botonSchedule": "Agendar",
+    "modal": {
+        "header": "Complete para agendar",
+        "emailField": {
+            "label": "Correo",
+            "placeholder": "escriba su correo"
+        },
+        "branchField": {
+            "lable": "Selecciona la sucursal",
+            "placeholder": "Encuentra la sucursal"
+        },
+        "botonConfirm": "Confirmar",
+        "messageNotRegister1": "El correo",
+        "messageNotRegister2": "no esta registrado",
+        "messageNotRegister3": "Si ya ha frecuentado este local verifique su correo, sino presione continuar para registrarse.",
+        "botonVerify": "verificar correo",
+        "continue": "Continuar",
+        "firstNameField": "Escriba su nombre",
+        "lastNameField": "Escriba su apellido",
+        "phoneField": {
+            "countrySelectorLabel": "Código de país",
+            "countrySelectorError": "Elija un país",
+            "phoneNumberLabel": "Escriba su número de teléfono",
+            "example": "Ejemplo :"
+        },
+        "birthDateField": {
+            "label": "Fecha de nacimiento",
+            "placeholder": "Selecciona tu fecha de nacimiento"
+        },
+        "botonBack": "Atrás",
+        "botonRegister": "Registrar y continuar",
+        "registerSuccess": "Registro exitoso",
+        "existClient": "El cliente ya existe",
+        "clickOutside": {
+            "title": "Debe identificarse",
+            "message": "Debe ingresar un correo valido (Si, no esta registrado debe registrarse) y seleccionar su sucursal de preferencia."
+        }
+    },
+    "welcomeMessage": {
+        "title": "Bienvenido",
+        "message": "Ya puedes agendar tu cita"
+    },
+    "menu": {
+        "header": "Datos de agendamiento",
+        "service": "Servicios",
+        "professional": "Profesionales",
+        "information": "Información",
+        "alert": "Debe completar los datos"
+    },
+    "services": {
+        "select": "Servicios seleccionados",
+        "noSelect": "No ha seleccionado ningún servicio.",
+        "services": "Servicios"
+    },
+    "professionals": {
+        "date": "Seleccione fecha",
+        "professional": "Seleccione profesionales",
+        "hours": "Seleccione horas",
+        "busy": "Ocupado",
+        "noSelect": "No seleccionable",
+        "available": "Disponible",
+        "firstAvailable": "Primero disponible",
+        "hoursBusy": "Horas ocupadas",
+        "selectHour": "Selecciona hora",
+        "selected": "Selecionado"
+    },
+    "information": {
+        "date": "Fecha",
+        "initHour": "Hora de inicio",
+        "countService": "Servicio",
+        "start": "Desde las",
+        "end": "Hasta las"
+    },
+    "connectionError": "Error de conexión",
+    "createdSuccesfuly": "Agendamiento creado con exito",
+    "finalInfo": {
+        "title": "Mensaje de información final",
+        "message": "¡Listo! Hemos enviado la cita a tu correo electrónico con todos los detalles del agendamiento. Por favor verificar que todo esté correctoy en caso de haber algún error o no poder asistir debes presionar el botón de Cancelar para dejar sin efecto el agendamiento. <br> Una vez tomada la hora, el día previo a la cita te llegará un correo de confirmación y es importante que le des al botón de Confirmar la hora tomada, de lo contrario entenderemos que no asistirás. <br> Si dicho correo electrónico de agendamiento no llega, recuerda revisar la caja de spam o correo no deseado. En caso de no encontrar la información por favor ponte en contacto con nosotros a través de nuestras redes de atención o al WhatsApp y verificaremos de inmediato.",
+        "boton": "Finalizar",
+        "phone": "(407) 496-7861"
+    }
+}
