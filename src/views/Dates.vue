@@ -401,6 +401,17 @@
                                                             {{data.end}}
                                                         </span>
                                                     </div>
+                                                    <div class="mx-auto">
+                                                        <span style="color:#000;font-weight:600;font-size:1.4em;text-transform:none" class="mt-3 ml-2">Emergencia: </span> 
+                                                        <span style="color:#000;font-weight:600;font-size:1.8em;">
+                                                            <a-switch  :checked="extraData.emergency" @change="b()"/>
+                                                        </span>
+                                                        <span style="color:#000;font-weight:600;font-size:1.4em;text-transform:none" class=" mt-3 ml-3">Seguro: </span>
+                                                        <span style="color:#000;font-weight:600;font-size:1.8em;" class="">
+                                                            <a-switch  :checked="extraData.secure" @change="a()"/>
+                                                        </span>
+                                                    </div>
+                                                    
                                                 </div>
                                             </base-button>
                                         </div>
@@ -576,7 +587,7 @@
                     </div>
                   </card>
                 
-                <tabs fill class="flex-column flex-md-row">
+                <tabs v-if="selectedEvent.content != ''" fill class="flex-column flex-md-row">
                     <card shadow>
                         <tab-pane>
                             <span slot="title">
@@ -605,11 +616,77 @@
                                 <span >Salida:</span>
                                 <badge style="font-size:0.8em !important" class="text-default" type="success">{{dateSplitHours(selectedEvent.end)}}</badge>
                             </base-button>
-                            <base-button class="mt-1 col-12" size="sm" type="secondary">
+                            <base-button v-if="selectedEvent.typePay" class="mt-1 col-12" size="sm" type="secondary">
                                 <span >Tipo de pago:</span>
                                 <badge style="font-size:0.8em !important" class="text-default" type="success">{{selectedEvent.typePay}}</badge>
                             </base-button>
+                            <base-button v-if="selectedEvent.client" class="mt-1 col-12" size="sm" type="secondary">
+                                <span >Dirección:</span>
+                            </base-button>
+                            <base-button v-if="selectedEvent.client" class="mt-1 col-12" size="sm" type="secondary">
+                                <a-input v-model="selectedEvent.client.location" placeholder="Derección del cliente..." />
+                            </base-button>
+                            
+                             <base-button v-if="selectedEvent.extraData" class="mt-1 col-12" size="sm" type="secondary">
+                                <span >Link de fotos:</span>
+                            </base-button>
+                            <base-button v-if="selectedEvent.extraData" class="mt-1 col-12" size="sm" type="secondary">
+                                <a-input v-model="selectedEvent.extraData.linkPhotos" placeholder="Link de fotos..." />
+                            </base-button>
+                            
+                            <base-button v-if="selectedEvent.extraData" class="mt-1 col-12" size="sm" type="secondary">
+                                <span >Etapa:</span>
+                            </base-button>
+                            <base-button v-if="selectedEvent.extraData" class="mt-1 col-12" size="sm" type="secondary">
+                                <a-select
+                                ref="select"
+                                
+                                style="width: 240px"
+                                @focus="focus"
+                                @change="handleChange"
+                                >
+                                    <a-select-option value="jack">Opcion 1</a-select-option>
+                                    <a-select-option value="lucy">Opcion 2</a-select-option>
+                                    <a-select-option value="disabled">Opcion 3</a-select-option>
+                                    <a-select-option value="Yiminghe">Opcion 4</a-select-option>
+                                </a-select>
+                            </base-button>
+                            <base-button v-if="selectedEvent.extraData" class="mt-1 col-12" size="sm" type="secondary">
+                                <span >Cubierto por el seguro:</span>
+                                <badge style="font-size:0.8em !important" class="text-default" type="success">
+                                    <span v-if="selectedEvent.extraData.secure == true">SI</span>
+                                    <span v-else>NO</span>
+                                </badge>
+                            </base-button>
+                            <base-button v-if="selectedEvent.extraData" class="mt-1 col-12" size="sm" type="secondary">
+                                <span >Naturaleza del proyecto:</span>
+                                <badge style="font-size:0.8em !important" class="text-default" type="success">{{selectedEvent.extraData.nature}}</badge>
+                            </base-button>
+                            <base-button v-if="selectedEvent.extraData" class="mt-1 col-12" size="sm" type="secondary">
+                                <span >Tipo de material:</span>
+                                <badge style="font-size:0.8em !important" class="text-default" type="success">{{selectedEvent.extraData.material}}</badge>
+                            </base-button>
+                            <base-button v-if="selectedEvent.extraData" class="mt-1 col-12" size="sm" type="secondary">
+                                <span >Emergencia:</span>
+                                <badge style="font-size:0.8em !important" class="text-default" type="success">
+                                    <span v-if="selectedEvent.extraData.emergency == true">SI</span>
+                                    <span v-else>NO</span>
+                                </badge>
+                            </base-button>
                             <base-button class="mt-1 col-12" size="sm" type="secondary">
+                                <span >Detalles:</span>
+                            </base-button> 
+                            <base-input v-if="selectedEvent.extraData" alternative="">
+                                <textarea v-model="selectedEvent.extraData.details"  rows="4" class="form-control form-control-alternative" placeholder="Detalles del proyecto..."></textarea>
+                            </base-input>
+                            <center>
+                                <base-button v-on:click="editDateData()" outline size="sm" class="mx-auto col-4" type="default">
+                                    <span class="float-left">Editar</span>  
+                                    <span style="margin-top:3px" class="fa fa-edit float-right"></span>
+                                </base-button> 
+                            </center>
+                            
+                            <!-- <base-button class="mt-1 col-12" size="sm" type="secondary">
                                 <span class="text-success" v-if="dateData.discount.discount == true && dateData.discount.type == 'first'" >
                                     Lleva descuento (Primera atención)
                                     <i class="text-success p-1 ni ni-check-bold ni-1x aling-center"> </i>
@@ -622,7 +699,7 @@
                                     No lleva descuento 
                                     <i class="text-danger p-1 ni ni-fat-remove ni-1x aling-center"> </i>
                                 </span>
-                            </base-button>
+                            </base-button> -->
                             <div v-if="selectedEvent.microServices && selectedEvent.microServices.length > 0">
                                 <dt class="mt-3 text-center">Servicios adicionales</dt>
                                 <a-tooltip v-for="micro of selectedEvent.microServices" :key="micro" placement="top">
@@ -1093,6 +1170,15 @@ import mixinES from '../mixins/mixinES'
             employe: {},
             start: '',
             end: ''
+        },
+        extraData:{
+            linkPhotos: '',
+            secure: false,
+            nature: '',
+            material: '',
+            emergency: false,
+            details: '',
+            phase: ''
         },
         es_ES,
         spinningDate: false,
@@ -1719,6 +1805,32 @@ import mixinES from '../mixins/mixinES'
                 return true
             }else{
                 return false
+            }
+        },
+        async editDateData(){
+            try{
+                const editDate = await axios.post(endPoint.endpointTarget+'/dates/editDataDate',{
+                    id: this.selectedEvent._id,
+                    location: this.selectedEvent.client.location,
+                    link: this.selectedEvent.extraData.linkPhotos,
+                    details: this.selectedEvent.extraData.details
+                }, this.configHeader)
+
+                if (editDate) {
+                    this.$swal({
+                        type: 'success',
+                        icon: 'success',
+                        toast: true,
+                        position: 'top-end',
+                        title: 'Cambio exitoso',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                    this.getDates()
+                    this.dateModals.modal1 = false
+                }
+            }catch(err){
+                console.log(err)
             }
         },
         async selectServicePhone(id){
@@ -2450,6 +2562,22 @@ import mixinES from '../mixins/mixinES'
         Madeyour(){
             $('.ant-select-selection__clear').click()
         },
+        a(){
+            if (this.extraData.secure == false) {
+                this.extraData.secure = true
+            }else{
+                this.extraData.secure = false
+            }
+             
+        },
+        b(){
+            if (this.extraData.emergency == false) {
+                this.extraData.emergency = true
+            }else{
+                this.extraData.emergency = false
+            }
+             
+        },
         plusMicroFinally(){
             $('.thisSelect .ant-select-selection__clear').click()
             this.showCurrencyMicro = true
@@ -2682,7 +2810,8 @@ import mixinES from '../mixins/mixinES'
                 name:'',
                 id:'',
                 phone:'',
-                email:''
+                email:'',
+                location: ''
             }
             this.dataClient ={
                 firstName: '',
@@ -2796,6 +2925,7 @@ import mixinES from '../mixins/mixinES'
             })
         },
         selectClient(value){
+            console.log("este")
             console.log(value)
             if (value == 'register') {
                 this.dataClient.valid = false
@@ -2807,6 +2937,7 @@ import mixinES from '../mixins/mixinES'
                 this.dateClient = {
                     name: value.firstName + ' ' + value.lastName,
                     id: value._id,
+                    location : value.extraData.location,
                     email: value.email,
                     phone: value.phone
                 }
@@ -2816,6 +2947,7 @@ import mixinES from '../mixins/mixinES'
                     lastName: value.lastName,
                     email: value.email,
                     phone: value.phone,
+                    location : value.extraData.location,
                     instagram: value.instagram,
                     attends: value.attends,
                     recommender: value.recommender,
@@ -3065,6 +3197,7 @@ import mixinES from '../mixins/mixinES'
                                     client: this.dateClient,
                                     block: blockEdit,
                                     blockId: this.idDatesBlocks,
+                                    extraData: this.extraData,
                                     typeCreation: 'system',
                                     pdf: res.data.nameFile,
                                     ifClient: true
@@ -3152,6 +3285,7 @@ import mixinES from '../mixins/mixinES'
                                 client: this.dateClient,
                                 block: blockEdit,
                                 blockId: this.idDatesBlocks,
+                                extraData: this.extraData,
                                 typeCreation: 'system',
                                 pdf: 'not',
                                 ifClient: true
@@ -3283,6 +3417,7 @@ import mixinES from '../mixins/mixinES'
                     this.dateClient = {
                         name: res.data.data.firstName + ' ' + res.data.data.lastName,
                         id: res.data.data._id,
+                        location: res.data.extraData.location,
                         email: res.data.data.email,
                         phone: res.data.data.phone
                     }

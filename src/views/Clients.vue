@@ -90,7 +90,7 @@
                                             example: 'Ejemplo :'
                                         }"/>
                                     </div>
-                                    <base-input class="mb-2" addon-left-icon="ni ni-calendar-grid-58">
+                                    <!-- <base-input class="mb-2" addon-left-icon="ni ni-calendar-grid-58">
                                         <flat-picker 
                                             slot-scope="{focus, blur}"
                                             @on-open="focus"
@@ -102,11 +102,11 @@
                                             placeholder="Seleccione una fecha de nacimiento"
                                             v-model="registerClient.birthday">
                                         </flat-picker>
-                                    </base-input>
+                                    </base-input> -->
                                     <base-input alternative
                                                 type="text"
-                                                placeholder="Instagram"
-                                                v-model="registerClient.instagram"
+                                                placeholder="Dirección"
+                                                v-model="extraData.location"
                                                 addon-left-icon="fa fa-address-card"
                                                 addon-right-icon="fas fa-plus text-default">
                                     </base-input>
@@ -124,22 +124,22 @@
                                     Avanzados
                                 </span>
                                 <div class="row">
-                                    <base-button v-if="registerClient.birthday" class="col-12 mt-3" type="secondary">
+                                    <!-- <base-button v-if="registerClient.birthday" class="col-12 mt-3" type="secondary">
                                         <span class="text-left">Fecha de nacimiento</span>
                                         <badge class="text-default" type="success">{{registerClient.birthday | formatDate}}</badge>
-                                    </base-button>
+                                    </base-button> -->
                                     <base-button class="col-12 mt-1" type="secondary">
                                         <span>Participación</span>
                                         <badge class="text-default" type="success">{{registerClient.attends}}</badge>
                                     </base-button>
-                                    <base-button class="col-12 mt-1" type="secondary">
+                                    <!-- <base-button class="col-12 mt-1" type="secondary">
                                         <span class="text-left">Recomendaciones</span>
                                         <badge class="text-default" type="success">{{registerClient.recommendations}}</badge>
-                                    </base-button>
-                                    <base-button class="col-12 mt-1" type="secondary">
+                                    </base-button> -->
+                                    <!-- <base-button class="col-12 mt-1" type="secondary">
                                         <span class="text-left">Recomendador</span>
                                         <badge class="text-default" type="success">{{registerClient.recommender}}</badge>
-                                    </base-button>
+                                    </base-button> -->
                                     <base-button class="col-12 mt-1" type="secondary">
                                         <span>Cliente desde</span>
                                         <badge class="text-default" type="success">{{registerClient.createdAt | formatDate}}</badge>
@@ -195,12 +195,12 @@
                         <span style="color:red;position:absolute;right:60px;top:160px;z-index:1;font-size:20px">*</span>
                         <base-input alternative
                                     type="text"
-                                    placeholder="Instagram"
-                                    v-model="registerClient.instagram"
+                                    placeholder="Dirección"
+                                    v-model="extraData.location"
                                     addon-left-icon="fa fa-address-card"
                                     addon-right-icon="fas fa-plus text-default">
                         </base-input>
-                        <base-input addon-left-icon="ni ni-calendar-grid-58">
+                        <!-- <base-input addon-left-icon="ni ni-calendar-grid-58">
                             <flat-picker 
                                     slot-scope="{focus, blur}"
                                     @on-open="focus"
@@ -212,15 +212,15 @@
                                     placeholder="Seleccione una fecha de nacimiento"
                                     v-model="registerClient.birthday">
                             </flat-picker>
-                        </base-input>
-                        <base-checkbox v-model="registerClient.discount" class="mb-3">
+                        </base-input> -->
+                        <!-- <base-checkbox v-model="registerClient.discount" class="mb-3">
                             Descuento de nuevo cliente
                         </base-checkbox>
                         <vue-single-select
                             v-model="registerClient.recommender"
                             :options="clientsNames"
                             placeholder="Recomendador"
-                        ></vue-single-select>
+                        ></vue-single-select> -->
                         <div class="text-center">
                             <base-button type="primary" v-if="registerClient.valid == false" disabled class="my-4">{{tipeForm}}</base-button>
                             <base-button type="primary" v-on:click="registerClients()" v-else class="my-4">{{tipeForm}}</base-button>
@@ -295,7 +295,7 @@
                                 <template slot="title">
                                 <span>Detalles / Editar</span>
                                 </template>
-                                <base-button v-if="validRoute('clientes', 'detalle')" size="sm" type="default" @click="modals.modal1 = true , initialState(3), pushData(column.firstName, column.lastName, column.email, column.phone, column.instagram, column.attends, column.recommender, column.recommendations, column.lastAttend, column.createdAt, column._id, column.birthday)" icon="ni ni-bullet-list-67"></base-button>
+                                <base-button v-if="validRoute('clientes', 'detalle')" size="sm" type="default" @click="modals.modal1 = true , initialState(3), pushData(column.firstName, column.lastName, column.email, column.phone, column.instagram, column.attends, column.recommender, column.recommendations, column.lastAttend, column.createdAt, column._id, column.birthday, column.extraData)" icon="ni ni-bullet-list-67"></base-button>
                                 <base-button disabled v-else size="sm" type="default" icon="ni ni-bullet-list-67"></base-button>
                             </a-tooltip>
                             
@@ -359,12 +359,15 @@ export default {
         socket : io(endPoint.endpointTarget),
         clientState: true,
         phoneData: {isValid: false},
+        extraData:{
+            "location": ''
+        },
         registerClient: {
             firstName:'',
             lastName:'',
             email:'',
             phone: {
-                "countryCode": "CL", 
+                "countryCode": "US", 
                 "isValid": false, 
                 "phoneNumber": "", 
                 "countryCallingCode": "", 
@@ -616,21 +619,7 @@ export default {
             }
             var date = this.registerClient.birthday
             var validDate = true
-            if (this.registerClient.birthday != '') {
-                if (this.registerClient.birthday.split('-')[1]) {
-                    validDate = true
-                    var split = this.registerClient.birthday.split('-')
-                    date = split[1]+'-'+split[0]+'-'+split[2]
-                }else{
-                    validDate = false
-                    this.$swal({
-                        icon: 'error',
-                        title: 'Fecha invalida',
-                        showConfirmButton: false,
-                        timer: 1500
-                    })
-                } 
-            }
+            
             if(validDate){
                 axios.post(endPoint.endpointTarget+'/clients', {
                     firstName:this.registerClient.firstName,
@@ -638,8 +627,9 @@ export default {
                     email:this.registerClient.email,
                     recommender:this.registerClient.recommender,
                     idRecomender:idRecomender,
+                    extraData: this.extraData,
                     phone:this.registerClient.phone,
-                    birthday: date,
+                    birthday: "04-04-1995",
                     instagram:this.registerClient.instagram,
                     ifCheck: ifCheck
                 }, this.configHeader)
@@ -688,7 +678,7 @@ export default {
         validRegister(){
             setTimeout(() => {
                 this.registerClient.valid = false
-                if (this.registerClient.firstName != '' && this.registerClient.lastName != '' && this.registerClient.email != '' && this.registerClient.phone.isValid && this.registerClient.birthday != '') {
+                if (this.registerClient.firstName != '' && this.registerClient.lastName != '' && this.registerClient.email != '' && this.registerClient.phone.isValid && this.extraData.location != '') {
                     if (this.registerClient.email.split('@').length == 2) {
                         if (this.registerClient.email.split('@')[1].split('.').length >= 2) {
                             this.registerClient.valid = true
@@ -717,12 +707,15 @@ export default {
 			return string.charAt(0).toUpperCase() + string.slice(1);
         },
         initialState(val){
+            this.extraData = {
+                location: ''
+            }
             this.registerClient = {
                 firstName:'',
                 lastName:'',
                 email:'',
                 phone: {
-                    "countryCode": "CL", 
+                    "countryCode": "US", 
                     "isValid": false, 
                     "phoneNumber": "", 
                     "countryCallingCode": "", 
@@ -759,8 +752,8 @@ export default {
                 this.tipeForm = 'Editar'
             }
         },
-        pushData(firstName,lastName,email,phone,instagram,attends,recommender,recommendations,lastAttend,createdAt,_id, birthday){
-            console.log('entro')
+        pushData(firstName,lastName,email,phone,instagram,attends,recommender,recommendations,lastAttend,createdAt,_id, birthday, extra){
+            console.log(extra)
             this.registerClient =  {
                 firstName: firstName,
                 lastName: lastName,
@@ -777,6 +770,7 @@ export default {
                 attends: attends,
                 _id: _id
             }
+            this.extraData = extra
         },
         deleteClient(id){
 			this.$swal({
@@ -840,6 +834,7 @@ export default {
                 firstName: this.registerClient.firstName,
                 lastName: this.registerClient.lastName,
                 email: this.registerClient.email,
+                extraData: this.extraData,
                 phone: this.registerClient.phone,
                 instagram: this.registerClient.instagram,
                 birthday: this.registerClient.birthday
