@@ -488,15 +488,15 @@
                                     example: 'Ejemplo :'
                                 }"/>
                             </div>
-                            <div class="col-md-6">
-                                <base-input placeholder="Instagram" v-model="dataClient.instagram" addon-left-icon="ni ni-fat-add"></base-input>
+                            <div v-if="dataClient.extraData" class="col-md-6">
+                                <base-input v-on:keyup="validRegister()" placeholder="Dirección" v-model="dataClient.extraData.location" addon-left-icon="ni ni-fat-add"></base-input>
                             </div>
-                            <div class="col-md-3 col-sm-12">
+                            <!-- <div class="col-md-3 col-sm-12">
                                 <base-checkbox v-model="dataClient.discount" class="mt-2">
                                     Descuento de nuevo cliente
                                 </base-checkbox>
-                            </div>
-                            <div class="col-md-3 col-sm-12">
+                            </div> -->
+                            <!-- <div class="col-md-3 col-sm-12">
                                 <base-input addon-left-icon="ni ni-calendar-grid-58 w-100">
                                     <flat-picker 
                                             slot-scope="{focus, blur}"
@@ -509,26 +509,26 @@
                                             v-model="dataClient.birthday">
                                     </flat-picker>
                                 </base-input>
-                            </div>
-                            <div class="col-md-6 col-sm-12">
+                            </div> -->
+                            <!-- <div class="col-md-6 col-sm-12">
                                 <vue-single-select
                                     v-model="dataClient.recommender"
                                     :options="clientsNames"
                                     placeholder="Recomendador"
                                 ></vue-single-select>
-                            </div>
+                            </div> -->
                             <div v-if="dataClient.valid" class="col-md-3 col-sm-12">
                                 <base-button size="sm" class="col-12 mt-2" type="secondary">
                                     <span>Participación</span>
                                     <badge type="default">{{dataClient.attends}}</badge>
                                 </base-button>
                             </div>
-                            <div v-if="dataClient.valid" class="col-md-3 col-sm-12">
+                            <!-- <div v-if="dataClient.valid" class="col-md-3 col-sm-12">
                                 <base-button size="sm" class="col-12 mt-2" type="secondary">
                                     <span>Recomendaciones</span>
                                     <badge type="default">{{dataClient.recommendations}}</badge>
                                 </base-button>
-                            </div>
+                            </div> -->
                             <div v-if="dataClient.valid" class="col-md-3 col-sm-12">
                                 <base-button size="sm" class="col-12 mt-2" type="secondary">
                                     <span>Ultima atención</span>
@@ -640,15 +640,15 @@
                             <base-button v-if="selectedEvent.extraData" class="mt-1 col-12" size="sm" type="secondary">
                                 <a-select
                                 ref="select"
-                                
+                                v-model="selectedEvent.extraData.phase"
                                 style="width: 240px"
                                 @focus="focus"
                                 @change="handleChange"
                                 >
-                                    <a-select-option value="jack">Opcion 1</a-select-option>
-                                    <a-select-option value="lucy">Opcion 2</a-select-option>
-                                    <a-select-option value="disabled">Opcion 3</a-select-option>
-                                    <a-select-option value="Yiminghe">Opcion 4</a-select-option>
+                                    <a-select-option  value="default">Seleccione</a-select-option>
+                                    <a-select-option value="inicio">Inicio</a-select-option>
+                                    <a-select-option value="proceso">En proceso</a-select-option>
+                                    <a-select-option value="terminado">Terminado</a-select-option>
                                 </a-select>
                             </base-button>
                             <base-button v-if="selectedEvent.extraData" class="mt-1 col-12" size="sm" type="secondary">
@@ -660,11 +660,15 @@
                             </base-button>
                             <base-button v-if="selectedEvent.extraData" class="mt-1 col-12" size="sm" type="secondary">
                                 <span >Naturaleza del proyecto:</span>
-                                <badge style="font-size:0.8em !important" class="text-default" type="success">{{selectedEvent.extraData.nature}}</badge>
+                            </base-button>
+                            <base-button v-if="selectedEvent.extraData" class="mt-1 col-12" size="sm" type="secondary">
+                                <a-input v-model="selectedEvent.extraData.nature" placeholder="Naturaleza del proyecto..." />
                             </base-button>
                             <base-button v-if="selectedEvent.extraData" class="mt-1 col-12" size="sm" type="secondary">
                                 <span >Tipo de material:</span>
-                                <badge style="font-size:0.8em !important" class="text-default" type="success">{{selectedEvent.extraData.material}}</badge>
+                            </base-button>
+                            <base-button v-if="selectedEvent.extraData" class="mt-1 col-12" size="sm" type="secondary">
+                                <a-input v-model="selectedEvent.extraData.material" placeholder="Tipo de material..." />
                             </base-button>
                             <base-button v-if="selectedEvent.extraData" class="mt-1 col-12" size="sm" type="secondary">
                                 <span >Emergencia:</span>
@@ -700,7 +704,7 @@
                                     <i class="text-danger p-1 ni ni-fat-remove ni-1x aling-center"> </i>
                                 </span>
                             </base-button> -->
-                            <div v-if="selectedEvent.microServices && selectedEvent.microServices.length > 0">
+                            <!-- <div v-if="selectedEvent.microServices && selectedEvent.microServices.length > 0">
                                 <dt class="mt-3 text-center">Servicios adicionales</dt>
                                 <a-tooltip v-for="micro of selectedEvent.microServices" :key="micro" placement="top">
                                     <template slot="title">
@@ -709,15 +713,14 @@
                                     </template>
                                     <badge  style="font-size:0.85em; cursor:pointer" class="mt-1 ml-1 text-default" type="primary">{{micro.name}}</badge>
                                 </a-tooltip>
-                            </div>
+                            </div> -->
                              
                             
 
                             <base-button v-if="selectedEvent.typepay == 'Transferencia'" class="mt-1 col-12" size="sm" type="default">
                                 <a :href="imgEndpoint+'/static/designs/'+selectedEvent.paypdf" target="_blank" download>Descargar comprobante</a>
                             </base-button>
-                            <hr/>
-                            <template v-if="selectedEvent.imgDesign">
+                            <!-- <template v-if="selectedEvent.imgDesign">
                                 <a-spin size="large" :spinning="loadImage">
                                     <dt class="text-center" style="margin-top:-10px;"><b>Imagen del diseño</b> <span v-if="selectedEvent.imgDesign.length >= 3"> (Máximo 3)</span></dt>
                                     <div class="row mt-1" v-if="selectedEvent.imgDesign.length < 3">
@@ -746,7 +749,7 @@
                                         </div>
                                     </div>
                                 </a-spin>
-                            </template>
+                            </template> -->
                         </tab-pane>
                         <tab-pane>
                             <span slot="title">
@@ -1178,7 +1181,7 @@ import mixinES from '../mixins/mixinES'
             material: '',
             emergency: false,
             details: '',
-            phase: ''
+            phase: 'default'
         },
         es_ES,
         spinningDate: false,
@@ -1402,7 +1405,7 @@ import mixinES from '../mixins/mixinES'
             lastName: '',
             email: '',
             phone: {
-                "countryCode": "CL", 
+                "countryCode": "US", 
                 "isValid": false, 
                 "phoneNumber": "", 
                 "countryCallingCode": "", 
@@ -1412,6 +1415,9 @@ import mixinES from '../mixins/mixinES'
                 "formatNational": "", 
                 "uri": "", 
                 "e164": ""
+            },
+            extraData: {
+                location: ''
             },
             instagram: '',
             attends: '',
@@ -1812,6 +1818,9 @@ import mixinES from '../mixins/mixinES'
                 const editDate = await axios.post(endPoint.endpointTarget+'/dates/editDataDate',{
                     id: this.selectedEvent._id,
                     location: this.selectedEvent.client.location,
+                    material: this.selectedEvent.extraData.material,
+                    phase: this.selectedEvent.extraData.phase,
+                    nature: this.selectedEvent.extraData.nature,
                     link: this.selectedEvent.extraData.linkPhotos,
                     details: this.selectedEvent.extraData.details
                 }, this.configHeader)
@@ -1827,7 +1836,6 @@ import mixinES from '../mixins/mixinES'
                         timer: 1500
                     })
                     this.getDates()
-                    this.dateModals.modal1 = false
                 }
             }catch(err){
                 console.log(err)
@@ -2463,6 +2471,7 @@ import mixinES from '../mixins/mixinES'
                 firstName: this.dataClient.firstName,
                 lastName: this.dataClient.lastName,
                 email: this.dataClient.email,
+                extraData: this.dataClient.extraData,
                 phone: this.dataClient.phone,
                 instagram: this.dataClient.instagram,
                 birthday: this.dataClient.birthday
@@ -2482,7 +2491,7 @@ import mixinES from '../mixins/mixinES'
                         this.dataClient.lastName = ''
                         this.dataClient.email = ''
                         this.dataClient.phone = ''
-                        this.dataClient.instagram = ''
+                        this.dataClient.extraData.location = ''
                         this.dataClient.birthday = ''
                         this.dataClient.valid2 = false
                         setTimeout(() => {
@@ -2925,8 +2934,6 @@ import mixinES from '../mixins/mixinES'
             })
         },
         selectClient(value){
-            console.log("este")
-            console.log(value)
             if (value == 'register') {
                 this.dataClient.valid = false
                 this.dateClient.valid2 = false
@@ -2947,7 +2954,7 @@ import mixinES from '../mixins/mixinES'
                     lastName: value.lastName,
                     email: value.email,
                     phone: value.phone,
-                    location : value.extraData.location,
+                    extraData: value.extraData,
                     instagram: value.instagram,
                     attends: value.attends,
                     recommender: value.recommender,
@@ -2963,7 +2970,7 @@ import mixinES from '../mixins/mixinES'
         },
         validRegister(){
             setTimeout(() => {
-                if (this.dataClient.firstName.length > 2 && this.dataClient.lastName.length > 2 && this.dataClient.email != '' && this.dataClient.phone.isValid && this.dataClient.birthday != '') {
+                if (this.dataClient.firstName.length > 2 && this.dataClient.lastName.length > 2 && this.dataClient.email != '' && this.dataClient.phone.isValid  && this.dataClient.extraData.location != '') {
                     if (this.dataClient.email.split('@').length == 2) {
                         if (this.dataClient.email.split('@')[1].split('.').length >= 2) {
                             this.dataClient.valid2 = true
@@ -2977,8 +2984,6 @@ import mixinES from '../mixins/mixinES'
                 else{
                     this.dataClient.valid2 = false
                 }
-                  console.log(this.dataClient.valid)
-                console.log(this.dataClient.valid2)
             }, 200);
             
         },
@@ -3400,7 +3405,8 @@ import mixinES from '../mixins/mixinES'
                 email:this.dataClient.email,
                 recommender:this.dataClient.recommender,
                 idRecomender:this.dataClient.idRecommender,
-                phone:this.dataClient.phone,
+                extraData: this.dataClient.extraData,
+                phone: this.dataClient.phone,
                 birthday: date,
                 instagram:this.dataClient.instagram,
                 ifCheck: ifCheck
@@ -3417,7 +3423,7 @@ import mixinES from '../mixins/mixinES'
                     this.dateClient = {
                         name: res.data.data.firstName + ' ' + res.data.data.lastName,
                         id: res.data.data._id,
-                        location: res.data.extraData.location,
+                        location: res.data.data.extraData.location,
                         email: res.data.data.email,
                         phone: res.data.data.phone
                     }
