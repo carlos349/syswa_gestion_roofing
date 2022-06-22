@@ -291,6 +291,18 @@
                                                     <badge type="secondary" class="w-100" style="margin-top:-5px;font-weigth:600;font-family: Open Sans, sans-serif;line-height: .2;">
                                                         <span style="color:#000;font-weight:600;font-size:2.8em;">{{data.end}}</span> 
                                                     </badge>
+                                                    <badge type="secondary" class="w-100" style="margin-top:-5px;font-weigth:600;font-family: Open Sans, sans-serif;line-height: .2;">
+                                                        <span style="color:#000;font-weight:600;font-size:.96em;text-transform:none;">Seguro</span> 
+                                                    </badge>
+                                                    <badge type="secondary" class="w-100" style="margin-top:-5px;font-weigth:600;font-family: Open Sans, sans-serif;line-height: .2;">
+                                                        <span style="color:#000;font-weight:600;font-size:2.8em;"><a-switch  :checked="extraData.secure" @change="a()"/></span> 
+                                                    </badge>
+                                                    <badge type="secondary" class="w-100" style="margin-top:-5px;font-weigth:600;font-family: Open Sans, sans-serif;line-height: .2;">
+                                                        <span style="color:#000;font-weight:600;font-size:.96em;text-transform:none;">Emergencia</span> 
+                                                    </badge>
+                                                    <badge type="secondary" class="w-100" style="margin-top:-5px;font-weigth:600;font-family: Open Sans, sans-serif;line-height: .2;">
+                                                        <span style="color:#000;font-weight:600;font-size:2.8em;"><a-switch  :checked="extraData.emergency" @change="b()"/></span> 
+                                                    </badge>
                                                 </div>
                                             </div>
                                         </div>
@@ -650,6 +662,15 @@
                     ] 
                            
                 },
+                extraData:{
+                    linkPhotos: '',
+                    secure: false,
+                    nature: '',
+                    material: '',
+                    emergency: false,
+                    details: '',
+                    phase: 'default'
+                },
                 validPay:false,
                 progress:false,
                 spinningDate: false,
@@ -899,6 +920,7 @@
                             email: findClient.data.data.email,
                             lastName: findClient.data.data.lastName,
                             id: findClient.data.data._id,
+                            location: findClient.data.data.extraData.location,
                             name: findClient.data.data.firstName + ' ' + findClient.data.data.lastName,
                             phone: findClient.data.data.phone.formatInternational,
                             pay: 'Presencial efectivo',
@@ -1273,6 +1295,7 @@
                                     date: this.finalDate,
                                     client: this.registerUser,
                                     block: blockEdit,
+                                    extraData: this.extraData,
                                     blockId: this.idDatesBlocks,
                                     typeCreation: 'Web',
                                     pdf: res.data.nameFile,
@@ -1315,6 +1338,7 @@
                                 date: this.finalDate,
                                 client: this.registerUser,
                                 block: blockEdit,
+                                extraData: this.extraData,
                                 blockId: this.idDatesBlocks,
                                 typeCreation: 'Web',
                                 pdf: 'not',
@@ -1995,6 +2019,22 @@
                         }
                     }
                 }
+            },
+            a(){
+                if (this.extraData.secure == false) {
+                    this.extraData.secure = true
+                }else{
+                    this.extraData.secure = false
+                }
+                
+            },
+            b(){
+                if (this.extraData.emergency == false) {
+                    this.extraData.emergency = true
+                }else{
+                    this.extraData.emergency = false
+                }
+                
             },
             selectBloqMulti(lenders, hora, i, indexService, open, check){
                 var oldEmploye = {
