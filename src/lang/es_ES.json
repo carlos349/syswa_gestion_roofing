@@ -74,7 +74,9 @@
         "initHour": "Hora de inicio",
         "countService": "Servicio",
         "start": "Desde las",
-        "end": "Hasta las"
+        "end": "Hasta las",
+        "insurance": "Seguro",
+        "emergency": "Emergencia"
     },
     "connectionError": "Error de conexión",
     "createdSuccesfuly": "Agendamiento creado con exito",

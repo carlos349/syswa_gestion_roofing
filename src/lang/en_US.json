@@ -74,7 +74,9 @@
         "initHour": "Start time",
         "countService": "Service",
         "start": "From",
-        "end": "Till"
+        "end": "Till",
+        "insurance": "Insurance",
+        "emergency": "Emergency"
     },
     "connectionError": "Connection error",
     "createdSuccesfuly": "Schedule created successfully",

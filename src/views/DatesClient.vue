@@ -292,13 +292,13 @@
                                                         <span style="color:#000;font-weight:600;font-size:2.8em;">{{data.end}}</span> 
                                                     </badge>
                                                     <badge type="secondary" class="w-100" style="margin-top:-5px;font-weigth:600;font-family: Open Sans, sans-serif;line-height: .2;">
-                                                        <span style="color:#000;font-weight:600;font-size:.96em;text-transform:none;">Seguro</span> 
+                                                        <span style="color:#000;font-weight:600;font-size:.96em;text-transform:none;">{{setLenguage.information.insurance}}</span> 
                                                     </badge>
                                                     <badge type="secondary" class="w-100" style="margin-top:-5px;font-weigth:600;font-family: Open Sans, sans-serif;line-height: .2;">
                                                         <span style="color:#000;font-weight:600;font-size:2.8em;"><a-switch  :checked="extraData.secure" @change="a()"/></span> 
                                                     </badge>
                                                     <badge type="secondary" class="w-100" style="margin-top:-5px;font-weigth:600;font-family: Open Sans, sans-serif;line-height: .2;">
-                                                        <span style="color:#000;font-weight:600;font-size:.96em;text-transform:none;">Emergencia</span> 
+                                                        <span style="color:#000;font-weight:600;font-size:.96em;text-transform:none;">{{setLenguage.information.emergency}}</span> 
                                                     </badge>
                                                     <badge type="secondary" class="w-100" style="margin-top:-5px;font-weigth:600;font-family: Open Sans, sans-serif;line-height: .2;">
                                                         <span style="color:#000;font-weight:600;font-size:2.8em;"><a-switch  :checked="extraData.emergency" @change="b()"/></span> 
@@ -622,7 +622,8 @@
     import flatPicker from "vue-flatpickr-component";
     import {Spanish} from 'flatpickr/dist/l10n/es.js';
     import {English} from 'flatpickr/dist/l10n/default.js';
-    import locale from 'ant-design-vue/es/date-picker/locale/es_ES';
+    import locale_es from 'ant-design-vue/es/date-picker/locale/es_ES';
+    import locale_en from 'ant-design-vue/es/date-picker/locale/en_US';
     
     import vueCustomScrollbar from 'vue-custom-scrollbar'
     import VuePhoneNumberInput from 'vue-phone-number-input';
@@ -644,7 +645,7 @@
                 ifUserRegister: false,
                 branch: '',
                 branches: [],
-                locale,
+                locale: locale_en,
                 es_ES,
                 en_US,
                 setLenguage: en_US,
@@ -922,7 +923,7 @@
                             email: findClient.data.data.email,
                             lastName: findClient.data.data.lastName,
                             id: findClient.data.data._id,
-                            location: findClient.data.data.extraData.location,
+                            location: findClient.data.data.extraData ? findClient.data.data.extraData.location : "",
                             name: findClient.data.data.firstName + ' ' + findClient.data.data.lastName,
                             phone: findClient.data.data.phone.formatInternational,
                             pay: 'Presencial efectivo',
@@ -986,6 +987,7 @@
                         })
                     }
                 }catch(err){
+                    console.log(err)
                     if (!err.response) {
                         this.$swal({
                             icon: 'error',
@@ -1447,9 +1449,11 @@
                 if (this.setLenguage.lenguage  == "EN") {
                     this.setLenguage = this.es_ES
                     this.configDate.locale = Spanish
+                    this.locale = locale_es
                 }else{
                     this.setLenguage = this.en_US
                     this.configDate.locale = English
+                    this.locale = locale_en
                 }
             },
             async getEmployes(){
