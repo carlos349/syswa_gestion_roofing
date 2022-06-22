@@ -2,6 +2,7 @@
     "lenguage": "ES",
     "botonNext": "Continuar",
     "botonBack": "Atrás",
+    "changeLenguage": "Cambiar idioma",
     "botonSchedule": "Agendar",
     "modal": {
         "header": "Complete para agendar",
@@ -79,7 +80,9 @@
     "createdSuccesfuly": "Agendamiento creado con exito",
     "finalInfo": {
         "title": "Mensaje de información final",
-        "message": "¡Listo! Hemos enviado la cita a tu correo electrónico con todos los detalles del agendamiento. Por favor verificar que todo esté correctoy en caso de haber algún error o no poder asistir debes presionar el botón de Cancelar para dejar sin efecto el agendamiento. <br> Una vez tomada la hora, el día previo a la cita te llegará un correo de confirmación y es importante que le des al botón de Confirmar la hora tomada, de lo contrario entenderemos que no asistirás. <br> Si dicho correo electrónico de agendamiento no llega, recuerda revisar la caja de spam o correo no deseado. En caso de no encontrar la información por favor ponte en contacto con nosotros a través de nuestras redes de atención o al WhatsApp y verificaremos de inmediato.",
+        "message": "¡Listo! Hemos enviado la cita a tu correo electrónico con todos los detalles del agendamiento. Por favor verificar que todo esté correctoy en caso de haber algún error o no poder asistir debes presionar el botón de Cancelar para dejar sin efecto el agendamiento.",
+        "message2": "Una vez tomada la hora, el día previo a la cita te llegará un correo de confirmación y es importante que le des al botón de Confirmar la hora tomada, de lo contrario entenderemos que no asistirás.",
+        "message3": "Si dicho correo electrónico de agendamiento no llega, recuerda revisar la caja de spam o correo no deseado. En caso de no encontrar la información por favor ponte en contacto con nosotros a través de nuestras redes de atención o al WhatsApp y verificaremos de inmediato.",
         "boton": "Finalizar",
         "phone": "(407) 496-7861"
     }

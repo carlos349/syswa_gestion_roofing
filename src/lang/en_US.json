@@ -1,6 +1,7 @@
 {
     "lenguage": "EN",
     "botonNext": "Continue",
+    "changeLenguage": "Change lenguage",
     "botonBack": "Go back",
     "botonSchedule": "Schedule!",
     "modal": {
@@ -62,7 +63,7 @@
         "hours": "Select times",
         "hoursBusy": "Busy hours",
         "selectHour": "Select a time",
-        "busy": "busy",
+        "busy": "Busy",
         "selected": "Selected",
         "noSelect": "Not selectable",
         "available": "Available",
@@ -72,15 +73,17 @@
         "date": "Date",
         "initHour": "Start time",
         "countService": "Service",
-        "start": "Since",
-        "end": "Until"
+        "start": "From",
+        "end": "Till"
     },
     "connectionError": "Connection error",
     "createdSuccesfuly": "Schedule created successfully",
     "finalInfo": {
         "title": "Final message information",
-        "message": "Clever! We have sent the appointment to your email with all the details of the schedule. Please verify that everything is correct and if there is an error or you cannot attend, you must press the Cancel button to cancel the scheduling. <br> Once the time has been taken, the day before the appointment you will receive a confirmation email and it is important that you click on the Confirm the time taken button, otherwise we will understand that you will not attend. <br> If the scheduling email does not arrive, remember to check the spam or junk mail box. If you do not find the information, please contact us through our service networks or WhatsApp and we will verify immediately.",
-        "boton": "Ready",
+        "message": "All ready! We have sent the appointment to your email with all the details of the schedule. Please verify that everything is correct and if there is an error or you cannot attend, you must press the Cancel button to cancel the scheduling.",
+        "message2": "Once the time has been taken, the day before the appointment you will receive a confirmation email and it is important that you click on the Confirm button, otherwise we will understand that you will not attend.",
+        "message3": "If the scheduling email does not arrive, remember to check the spam or junk mail box. If you do not find the information, please contact us through our service networks or WhatsApp and we will verify immediately",
+        "boton": "Finish",
         "phone": "(407) 496-7861"
     }
 }

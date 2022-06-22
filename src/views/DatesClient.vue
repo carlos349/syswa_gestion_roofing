@@ -514,9 +514,11 @@
                 <div class="card-info text-justify">
                     <hr>
                     <div>
-                        <p>
+                        <p style="font-weight:500;">
 
-                            {{setLenguage.finalInfo.message}}
+                            {{setLenguage.finalInfo.message}} <br><br>
+                            {{setLenguage.finalInfo.message2}} <br><br>
+                            {{setLenguage.finalInfo.message3}}
                             <!-- ¡Listo! Hemos enviado la cita a tu correo electrónico con todos los detalles del agendamiento.
                             <b style="font-weight:600;">Por favor verificar que todo esté correcto</b>y en caso de haber algún error o no poder asistir debes presionar el botón de Cancelar para dejar sin efecto el agendamiento.
                             <br><br>
