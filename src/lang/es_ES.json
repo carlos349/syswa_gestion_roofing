@@ -14,6 +14,7 @@
             "lable": "Selecciona la sucursal",
             "placeholder": "Encuentra la sucursal"
         },
+        "address": "Dirección",
         "botonConfirm": "Confirmar",
         "messageNotRegister1": "El correo",
         "messageNotRegister2": "no esta registrado",

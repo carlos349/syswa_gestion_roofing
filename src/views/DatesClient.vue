@@ -461,13 +461,11 @@
                             phoneNumberLabel: setLenguage.modal.phoneField.phoneNumberLabel,
                             example: setLenguage.modal.phoneField.example
                         }"/>
-                    </div>
-                    <label for="date" class="w-100 mt-2">{{setLenguage.modal.birthDateField.label}} </label>
-
+                    </div><br>
                     <base-input alternative
                         type="text"
                         v-on:keyup="validFields()"
-                        placeholder="DIRECCION"
+                        :placeholder="setLenguage.modal.address"
                         v-model="extraData.location"
                         addon-left-icon="ni ni-fat-add">
                     </base-input>

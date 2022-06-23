@@ -14,6 +14,7 @@
             "lable": "select the office",
             "placeholder": "find the office"
         },
+        "address": "Address",
         "botonConfirm": "Confirm",
         "messageNotRegister1": "The email",
         "messageNotRegister2": "is not registered",
