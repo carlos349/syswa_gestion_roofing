@@ -1091,7 +1091,8 @@
             datesPolitics: this.configData.datesPolitics,
             microServices: this.configData.microServices,
             notificationDiscount: this.configData.notificationDiscount,
-            datesPolicies: this.configData.datesPolicies
+            datesPolicies: this.configData.datesPolicies,
+            branch: this.branch
           }, this.configHeader)
           .then(res => {
             if (res.data.status == 'ok') {

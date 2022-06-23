@@ -339,7 +339,7 @@
                 </a>
             </div>
             <span class="navbar-text col-6 m-0" style="float: right !important;">
-                © {{year}} | <a href="http://www.syswa.com" class="font-weight-bold ml-1" target="_blank">SYSWA</a> Todos los derechos reservados
+                © {{year}} | <a href="http://www.syswa.com" class="font-weight-bold ml-1" target="_blank">SYSWA</a> {{setLenguage.allRightReserves}}
             </span>
         </nav>
         <modal :show.sync="modals.modal0">
