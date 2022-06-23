@@ -463,7 +463,15 @@
                         }"/>
                     </div>
                     <label for="date" class="w-100 mt-2">{{setLenguage.modal.birthDateField.label}} </label>
-                    <a-date-picker class="w-100" :locale="locale" :format="dateFormat" @change="selectBirthday" />
+
+                    <base-input alternative
+                        type="text"
+                        v-on:keyup="validFields()"
+                        placeholder="DIRECCION"
+                        v-model="extraData.location"
+                        addon-left-icon="ni ni-fat-add">
+                    </base-input>
+
                     <span style="color:red;position:absolute;right:35px;top:270px;z-index:1;">*</span>
                     <div class="col-12">
                         <div class="row">
@@ -762,6 +770,9 @@
                 categories: [],
                 active: {
                     'background-color': '#0b1526'
+                },
+                extraData: {
+                    location: ''
                 },
                 linkForCopy:'',
                 showLenderSection: false,
@@ -1134,7 +1145,7 @@
                     splitTwo = split[1].split('.')
                 }
                 
-                if (this.registerUser.email != '' && this.registerUser.firstName != '' && this.registerUser.lastName != '' && this.phoneData.isValid && this.registerUser.birthday != '') {
+                if (this.registerUser.email != '' && this.registerUser.firstName != '' && this.registerUser.lastName != '' && this.phoneData.isValid && this.extraData.location != '') {
                     if (split.length == 2) {
                         if (splitTwo.length >= 2) {
                             this.validRegister = true
@@ -2558,6 +2569,7 @@
                     firstName: this.registerUser.firstName,
                     lastName: this.registerUser.lastName,
                     email: this.registerUser.email,
+                    extraData: this.extraData,
                     recommender: this.ref,
                     idRecomender: this.ref,
                     phone: this.phoneData,
